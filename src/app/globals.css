@@ -283,6 +283,153 @@ html::-webkit-scrollbar {
   }
 }
 
+/* Galeria: gravuras em molduras duplas e um visor no topo da página. */
+.gallery-thumbnail .poster-frame-inner {
+  border-color: var(--gallery-edge, var(--line));
+}
+
+.gallery-thumbnail .poster-frame-inner::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--gallery-edge, var(--line));
+  border-radius: 13px;
+  pointer-events: none;
+}
+
+.gallery-thumbnail .poster-frame-corner {
+  color: var(--gallery-edge, var(--ink));
+}
+
+.gallery-thumbnail-caption {
+  color: var(--gallery-edge, var(--ink));
+  overflow-wrap: anywhere;
+}
+
+.gallery-thumbnail .poster-frame-inner,
+.gallery-thumbnail .poster-frame-inner::after,
+.gallery-thumbnail .poster-frame-corner,
+.gallery-thumbnail-caption {
+  transition:
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.gallery-thumbnail:focus-visible {
+  --gallery-edge: var(--accent);
+}
+
+.gallery-dialog {
+  width: min(70rem, calc(100vw - 2rem));
+  max-width: none;
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 3px double var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: 0 16px 80px rgb(0 0 0 / 0.6);
+}
+
+
+.gallery-dialog::backdrop {
+  background: rgb(0 0 0 / 0.8);
+  backdrop-filter: blur(4px);
+}
+
+.gallery-panel {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.gallery-stage {
+  position: relative;
+  height: min(60dvh, 42rem);
+  background: var(--surface);
+}
+
+.gallery-image-stage {
+  touch-action: pan-y pinch-zoom;
+}
+
+.gallery-nav {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gallery-thumbnail:hover {
+    --gallery-edge: var(--accent);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gallery-dialog[open] {
+    animation: gallery-open 200ms var(--ease-out-quint);
+  }
+
+  .project-chapter-entry,
+  .gallery-media-enter {
+    animation: chapter-fade 200ms ease-out;
+  }
+
+  .mobile-menu-panel:not([hidden]) {
+    animation: menu-unfold 200ms var(--ease-out-quint);
+  }
+
+  .mobile-menu-panel:not([hidden]) .mobile-menu-item {
+    animation: chapter-fade 200ms ease-out backwards;
+  }
+}
+
+@keyframes chapter-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes menu-unfold {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes gallery-open {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-thumbnail .poster-frame-inner,
+  .gallery-thumbnail .poster-frame-inner::after,
+  .gallery-thumbnail .poster-frame-corner,
+  .gallery-thumbnail-caption {
+    transition: none;
+  }
+}
+
 /* Seta do hero: a ✦ desce pela haste em loop (parada com movimento reduzido) */
 .section-stars {
   position: fixed;
@@ -290,13 +437,34 @@ html::-webkit-scrollbar {
   right: 1rem;
   z-index: 50;
   transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+
+.section-stars[data-visible],
+.section-stars:focus-within {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-stars {
+    transition: none;
+  }
 }
 
 .section-stars ul {
   position: relative;
 }
 
-.section-stars ul::before {
+.section-stars li {
+  position: relative;
+  z-index: 1;
+}
+
+.section-stars ul::before,
+.section-stars ul::after {
   content: "";
   position: absolute;
   top: 22px;
@@ -305,6 +473,13 @@ html::-webkit-scrollbar {
   width: 1px;
   background: var(--line);
   opacity: 0.6;
+}
+
+.section-stars ul::after {
+  background: var(--accent);
+  opacity: 1;
+  transform-origin: top;
+  transform: scaleY(var(--section-progress, 0));
 }
 
 .section-star {
@@ -322,8 +497,8 @@ html::-webkit-scrollbar {
   width: 12px;
   height: 12px;
   transition:
-    transform 0.4s var(--ease-out-quint),
-    color 0.3s ease;
+    transform 0.2s var(--ease-out-quint),
+    color 0.2s ease;
 }
 
 .section-star[aria-current] {
@@ -334,7 +509,6 @@ html::-webkit-scrollbar {
   transform: scale(1.7) rotate(90deg);
 }
 
-.section-star:hover,
 .section-star:focus-visible {
   color: var(--accent);
 }
@@ -355,10 +529,254 @@ html::-webkit-scrollbar {
     transform 0.2s ease;
 }
 
-.section-star:hover .section-star-label,
 .section-star:focus-visible .section-star-label {
   opacity: 1;
   transform: none;
+}
+
+@keyframes star-ignite {
+  0%,
+  100% {
+    filter: none;
+  }
+  40% {
+    filter: drop-shadow(0 0 4px var(--accent));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .section-star[data-activated] .section-star-icon {
+    animation: star-ignite 350ms ease-out;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .section-star:hover {
+    color: var(--accent);
+  }
+
+  .section-star:hover .section-star-label {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Selo, gravura e fio de tinta: respostas curtas na mesma paleta do pôster. */
+.seal-button,
+.filter-chip,
+.ritual-control {
+  transition:
+    color 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    filter 200ms ease,
+    transform 200ms var(--ease-out-quint);
+}
+
+.seal-button:not(.seal-ghost) {
+  outline: 1px solid color-mix(in oklab, currentColor 24%, transparent);
+  outline-offset: -5px;
+}
+
+.seal-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.seal-button:active,
+.filter-chip:active,
+.ritual-control:active {
+  transform: scale(0.98);
+}
+
+.seal-primary:focus-visible {
+  filter: brightness(1.1);
+}
+
+.seal-outline:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.seal-ghost:focus-visible,
+.ritual-control:focus-visible {
+  color: var(--accent);
+}
+
+.filter-chip:not([aria-pressed="true"]):focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.ritual-link {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition:
+    color 200ms ease,
+    background-size 200ms ease,
+    text-decoration-color 200ms ease;
+}
+
+.ritual-link:focus-visible {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+  background-size: 100% 1px;
+}
+
+.project-card {
+  transform: translateY(var(--card-lift, 0px));
+  transition: transform 300ms var(--ease-out-quint);
+}
+
+.project-card-title {
+  color: var(--card-accent, var(--ink));
+  transition: color 300ms ease;
+}
+
+.project-cover .poster-frame-inner {
+  border-color: var(--card-accent, var(--line));
+  box-shadow:
+    inset 0 0 0 3px var(--surface),
+    inset 0 0 0 4px var(--card-accent, var(--line));
+  transition:
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+/* A linha interna permanece sobre as imagens da gravura. */
+.project-cover .poster-frame-inner::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--card-accent, var(--line));
+  border-radius: 13px;
+  pointer-events: none;
+  transition: border-color 300ms ease;
+}
+
+.project-cover .poster-frame-corner,
+.project-cover-fallback {
+  color: var(--card-accent, var(--muted));
+  transition: color 300ms ease;
+}
+
+.project-cover-image {
+  transform: scale(var(--cover-zoom, 1));
+  transition: transform 300ms var(--ease-out-quint);
+}
+
+.project-cover-icon {
+  transform: scale(var(--cover-icon-zoom, 1));
+  transition: transform 300ms var(--ease-out-quint);
+}
+
+.project-card-cta {
+  transform: translateX(var(--card-cta-shift, 0px));
+  transition: transform 300ms var(--ease-out-quint);
+}
+
+.project-card:has(a:focus-visible) {
+  --card-lift: -3px;
+  --card-accent: var(--accent);
+  --cover-zoom: 1.04;
+  --cover-icon-zoom: 1.1;
+  --card-cta-shift: 4px;
+}
+
+.scroll-cue-chevron {
+  transition: transform 200ms var(--ease-out-quint);
+}
+
+.scroll-cue:focus-visible .scroll-cue-chevron {
+  transform: translateY(2px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .seal-primary:hover {
+    filter: brightness(1.1);
+  }
+
+  .seal-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: var(--accent-soft);
+  }
+
+  .seal-ghost:hover,
+  .ritual-control:hover {
+    color: var(--accent);
+  }
+
+  .filter-chip:not([aria-pressed="true"]):hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: var(--accent-soft);
+  }
+
+  .ritual-link:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+    background-size: 100% 1px;
+  }
+
+  .project-card:hover {
+    --card-lift: -3px;
+    --card-accent: var(--accent);
+    --cover-zoom: 1.04;
+    --cover-icon-zoom: 1.1;
+    --card-cta-shift: 4px;
+  }
+
+  .scroll-cue:hover .scroll-cue-chevron {
+    transform: translateY(2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seal-button,
+  .filter-chip,
+  .ritual-control,
+  .ritual-link,
+  .project-card,
+  .project-card-title,
+  .project-cover .poster-frame-inner,
+  .project-cover .poster-frame-inner::after,
+  .project-cover .poster-frame-corner,
+  .project-cover-fallback,
+  .project-cover-image,
+  .project-cover-icon,
+  .project-card-cta,
+  .section-star-icon,
+  .section-star-label,
+  .nav-star {
+    transition: none;
+  }
+
+  .scroll-cue-chevron {
+    transition: none;
+  }
+
+  .scroll-cue:is(:hover, :focus-visible) .scroll-cue-chevron {
+    transform: none;
+  }
+
+  .seal-button:active,
+  .filter-chip:active,
+  .ritual-control:active,
+  .project-card,
+  .project-cover-image,
+  .project-cover-icon,
+  .project-card-cta,
+  .section-star[aria-current] .section-star-icon,
+  .section-star-label,
+  .nav-star {
+    transform: none;
+  }
 }
 
 @media (width < 80rem) {

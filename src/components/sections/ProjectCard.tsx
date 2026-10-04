@@ -10,12 +10,12 @@ export function ProjectCard({ project, locale, cta }: Props) {
   const title = project.title[locale];
 
   return (
-    <article className="group relative flex h-full flex-col">
+    <article className="project-card group relative flex h-full flex-col">
       <div className="mb-2 flex justify-between label-hud text-muted">
         <span>{project.year}</span>
         <span>{project.stack[0]}</span>
       </div>
-      <h3 className="mb-3 font-display text-[2.75rem] leading-[0.95] transition-colors group-hover:text-accent">
+      <h3 className="project-card-title mb-3 font-display text-[2.75rem] leading-[0.95]">
         {/* O ::after estica o link sobre o card inteiro */}
         <Link
           href={`/projects/${project.slug}`}
@@ -29,10 +29,7 @@ export function ProjectCard({ project, locale, cta }: Props) {
         {project.summary[locale]}
       </p>
       <p className="mt-4 label-hud text-muted">{project.stack.join(" · ")}</p>
-      <span
-        aria-hidden
-        className="mt-5 label-hud text-accent transition-transform group-hover:translate-x-1"
-      >
+      <span aria-hidden className="project-card-cta mt-5 label-hud text-accent">
         {cta} →
       </span>
     </article>

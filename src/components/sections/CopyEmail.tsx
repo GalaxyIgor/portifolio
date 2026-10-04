@@ -31,6 +31,18 @@ export function CopyEmail({ email, labels }: Props) {
   return (
     <div className="flex flex-wrap items-center gap-4">
       <button type="button" onClick={copy} className={buttonClasses("outline")}>
+        {status === "copied" && (
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            className="size-4 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="m5 12 4 4L19 6" />
+          </svg>
+        )}
         {status === "copied" ? labels.copied : labels.copy}
       </button>
       <p role="status" className="text-sm text-muted">

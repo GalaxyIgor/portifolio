@@ -33,7 +33,7 @@ export function MobileMenu({ items, openLabel, closeLabel, navLabel }: Props) {
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? closeLabel : openLabel}
-        className="grid size-9 place-items-center text-ink transition-colors hover:text-accent"
+        className="ritual-control grid size-9 place-items-center text-ink"
       >
         <svg
           viewBox="0 0 24 24"
@@ -54,20 +54,21 @@ export function MobileMenu({ items, openLabel, closeLabel, navLabel }: Props) {
 
       <div
         hidden={!open}
-        className="absolute inset-x-0 top-[calc(100%+0.5rem)]"
+        className="mobile-menu-panel absolute inset-x-0 top-[calc(100%+0.5rem)]"
       >
         <HudBox className="bg-bg/95 backdrop-blur-sm">
           <nav id={panelId} aria-label={navLabel}>
             <ul className="flex flex-col px-4 py-2">
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <li
                   key={item.id}
-                  className="border-b border-line last:border-b-0"
+                  className="mobile-menu-item border-b border-line last:border-b-0"
+                  style={{ animationDelay: `${index * 20}ms` }}
                 >
                   <Link
                     href={{ pathname: "/", hash: item.id }}
                     onClick={() => setOpen(false)}
-                    className="flex items-center justify-between py-3 font-display text-3xl transition-colors hover:text-accent"
+                    className="ritual-link flex items-center justify-between py-3 font-display text-3xl"
                   >
                     {item.label}
                     <span className="flex items-center gap-1.5 label-hud text-muted">

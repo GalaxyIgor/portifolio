@@ -1,5 +1,21 @@
 import type { Locale } from "@/i18n/routing";
 
+type GalleryBase = {
+  /** Arquivo local em /public/projects/<slug>/. */
+  src: string;
+  caption: Record<Locale, string>;
+};
+
+export type ProjectMedia = GalleryBase &
+  (
+    | { type: "image"; alt: Record<Locale, string> }
+    | {
+        type: "video";
+        poster?: string;
+        captions?: Partial<Record<Locale, string>>;
+      }
+  );
+
 export type Project = {
   slug: string;
   year: number;
@@ -8,6 +24,7 @@ export type Project = {
   links: { demo?: string; code?: string };
   // Caminho em /public. Sem capa, o card mostra um wireframe gerado.
   cover?: string;
+  gallery?: ProjectMedia[];
   title: Record<Locale, string>;
   summary: Record<Locale, string>;
   role: Record<Locale, string>;

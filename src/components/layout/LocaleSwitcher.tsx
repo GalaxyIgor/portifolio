@@ -29,7 +29,7 @@ export function LocaleSwitcher() {
             hrefLang={locale}
             aria-label={t(locale)}
             aria-current={locale === current ? "true" : undefined}
-            className="px-1.5 py-1 text-muted uppercase transition-colors hover:text-accent aria-[current]:text-ink"
+            className="ritual-link px-1.5 py-1 text-muted uppercase aria-[current]:text-ink"
           >
             {locale}
           </Link>

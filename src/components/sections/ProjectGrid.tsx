@@ -19,10 +19,10 @@ export function ProjectGrid({ projects, tags, locale, labels }: Props) {
     : projects;
 
   const chip = (selected: boolean) =>
-    `rounded-[2px] border px-3 py-1.5 label-hud transition-colors ${
+    `filter-chip rounded-[2px] border px-3 py-1.5 label-hud ${
       selected
         ? "border-accent bg-accent text-accent-ink"
-        : "border-line text-muted hover:border-ink hover:text-ink"
+        : "border-line text-muted"
     }`;
 
   return (

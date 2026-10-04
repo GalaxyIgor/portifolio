@@ -6,6 +6,7 @@ import { routing, type Locale } from "@/i18n/routing";
 import { projects } from "@/data/projects";
 import { getNextProject, getProject } from "@/lib/projects";
 import { ProjectCover } from "@/components/ui/ProjectCover";
+import { ProjectGallery } from "@/components/sections/ProjectGallery";
 import { Sparkle } from "@/components/ui/Sparkle";
 import { buttonClasses } from "@/components/ui/button";
 
@@ -124,6 +125,12 @@ export default async function CaseStudyPage({
           />
         </div>
       </header>
+
+      <ProjectGallery
+        media={project.gallery}
+        locale={l}
+        projectTitle={project.title[l]}
+      />
 
       <div className="mt-20 max-w-2xl border-t border-line pt-16">
         <Body />

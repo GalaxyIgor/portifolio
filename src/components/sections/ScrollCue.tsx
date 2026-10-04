@@ -13,7 +13,7 @@ export function ScrollCue({ to, ariaLabel, className = "" }: Props) {
     <Link
       href={{ pathname: "/", hash: to }}
       aria-label={ariaLabel}
-      className={`group pointer-events-auto flex flex-col items-center gap-0.5 p-2 text-ink/60 transition-colors hover:text-ink ${className}`}
+      className={`scroll-cue ritual-control pointer-events-auto flex flex-col items-center gap-0.5 p-2 text-ink/60 ${className}`}
     >
       <span aria-hidden className="relative h-6 w-2">
         <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-current opacity-40" />
@@ -22,7 +22,7 @@ export function ScrollCue({ to, ariaLabel, className = "" }: Props) {
       <svg
         aria-hidden
         viewBox="0 0 24 24"
-        className="size-3 transition-transform duration-300 group-hover:translate-y-0.5"
+        className="scroll-cue-chevron size-3"
         fill="none"
         stroke="currentColor"
         strokeWidth="2"

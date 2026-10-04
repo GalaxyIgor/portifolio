@@ -21,7 +21,7 @@ export function ThemeToggle({ label }: { label: string }) {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label={label}
       aria-pressed={mounted ? isDark : undefined}
-      className="grid size-9 place-items-center text-muted transition-colors hover:text-accent"
+      className="ritual-control grid size-9 place-items-center text-muted"
     >
       <svg
         viewBox="0 0 24 24"

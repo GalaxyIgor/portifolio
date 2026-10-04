@@ -29,7 +29,7 @@ export function ProjectCover({ slug, title, cover, priority }: Props) {
   const Icon = icons[fallbackIcons[hash(slug) % fallbackIcons.length]];
 
   return (
-    <PosterFrame className="aspect-[4/5]">
+    <PosterFrame className="project-cover aspect-[4/5]">
       {cover ? (
         <Image
           src={cover}
@@ -37,18 +37,18 @@ export function ProjectCover({ slug, title, cover, priority }: Props) {
           fill
           priority={priority}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition-transform duration-700 ease-out-quint group-hover:scale-[1.04]"
+          className="project-cover-image object-cover"
         />
       ) : (
         <div
           aria-hidden
-          className="relative grid size-full place-items-center text-muted transition-colors duration-500 group-hover:text-accent"
+          className="project-cover-fallback relative grid size-full place-items-center text-muted"
           style={{
             background:
               "radial-gradient(90% 70% at 50% 40%, var(--accent-soft), transparent 70%)",
           }}
         >
-          <Icon className="size-1/3 stroke-[0.5] transition-transform duration-700 ease-out-quint group-hover:scale-110" />
+          <Icon className="project-cover-icon size-1/3 stroke-[0.5]" />
           <span className="absolute bottom-4 left-4 label-hud">{slug}</span>
         </div>
       )}

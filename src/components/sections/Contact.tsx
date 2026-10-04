@@ -3,6 +3,7 @@ import { profile } from "@/data/profile";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Ornament } from "@/components/ui/Ornament";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 import { CopyEmail } from "./CopyEmail";
 
 export async function Contact() {
@@ -17,7 +18,7 @@ export async function Contact() {
       <Reveal>
         <a
           href={`mailto:${profile.email}`}
-          className="block font-display text-[clamp(2.25rem,8vw,6rem)] leading-none break-all transition-colors hover:text-accent"
+          className="ritual-link block font-display text-[clamp(2.25rem,8vw,6rem)] leading-none break-all"
         >
           {profile.email}
         </a>
@@ -41,9 +42,10 @@ export async function Contact() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="underline decoration-line underline-offset-[6px] transition-colors hover:text-accent hover:decoration-current"
+                  className="ritual-link inline-flex items-center gap-2 underline decoration-line underline-offset-[6px]"
                 >
-                  {social.label} ↗
+                  <SocialIcon name={social.label} />
+                  <span>{social.label} ↗</span>
                 </a>
               </li>
             ))}

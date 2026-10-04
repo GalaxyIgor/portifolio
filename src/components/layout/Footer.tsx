@@ -10,7 +10,7 @@ export async function Footer() {
         <p>
           © {new Date().getFullYear()} {profile.name}. {t("built")}
         </p>
-        <a href="#main" className="label-hud transition-colors hover:text-ink">
+        <a href="#main" className="ritual-link label-hud">
           ↑ {t("top")}
         </a>
       </div>

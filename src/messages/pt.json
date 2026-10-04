@@ -59,6 +59,18 @@
     "intro": "Ferramentas que uso no dia a dia, agrupadas pelo papel que cumprem."
   },
   "projects": {
+    "gallery": {
+      "title": "Galeria",
+      "open": "Abrir {type}: {caption}",
+      "image": "imagem",
+      "video": "vídeo",
+      "close": "Fechar galeria",
+      "previous": "Anterior",
+      "next": "Próximo",
+      "position": "{current} de {total}",
+      "captionsPt": "Português",
+      "captionsEn": "Inglês"
+    },
     "title": "Projetos",
     "intro": "Uma seleção de trabalhos, cada um com o problema, as decisões técnicas e o resultado.",
     "featured": "Em destaque",

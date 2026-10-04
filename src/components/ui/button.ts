@@ -1,11 +1,10 @@
 const base =
-  "label-hud inline-flex items-center justify-center gap-2 h-12 px-6 rounded-[3px] transition-[background-color,color,border-color,transform] duration-200 active:scale-[0.98]";
+  "seal-button label-hud inline-flex items-center justify-center gap-2 h-12 px-6 rounded-[3px]";
 
 const variants = {
-  primary: "bg-accent text-accent-ink hover:brightness-110",
-  outline:
-    "border border-ink/40 text-ink hover:border-accent hover:text-accent",
-  ghost: "text-muted hover:text-ink",
+  primary: "seal-primary bg-accent text-accent-ink",
+  outline: "seal-outline border border-ink/40 text-ink",
+  ghost: "seal-ghost text-muted",
 } as const;
 
 export type ButtonVariant = keyof typeof variants;

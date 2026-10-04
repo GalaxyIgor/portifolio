@@ -59,6 +59,18 @@
     "intro": "Tools I use day to day, grouped by the job they do."
   },
   "projects": {
+    "gallery": {
+      "title": "Gallery",
+      "open": "Open {type}: {caption}",
+      "image": "image",
+      "video": "video",
+      "close": "Close gallery",
+      "previous": "Previous",
+      "next": "Next",
+      "position": "{current} of {total}",
+      "captionsPt": "Portuguese",
+      "captionsEn": "English"
+    },
     "title": "Projects",
     "intro": "A selection of work, each with the problem, the technical decisions and the outcome.",
     "featured": "Featured",

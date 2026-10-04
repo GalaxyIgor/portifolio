@@ -12,7 +12,7 @@ import { MobileMenu } from "./MobileMenu";
 
 /**
  * Navbar em forma de painel de HUD, do mesmo material da barra de baixo do
- * hero. Flutua sobre a pintura; compartimentos separados por linhas finas.
+ * hero. Flutua sobre a pintura com uma moldura contínua.
  */
 export async function Header() {
   const t = await getTranslations("nav");
@@ -25,7 +25,7 @@ export async function Header() {
         <HudBox className="site-bar pointer-events-auto flex h-14 items-stretch backdrop-blur-sm">
           <Link
             href="/"
-            className="flex items-center gap-2 px-4 font-display text-[1.75rem] leading-none transition-colors hover:text-accent"
+            className="ritual-control flex items-center gap-2 px-4 font-display text-[1.75rem] leading-none"
             aria-label={`${profile.name} — ${t("home")}`}
           >
             {profile.name}
@@ -35,12 +35,11 @@ export async function Header() {
           <NavLinks
             items={items}
             label={t("primary")}
-            className="hidden flex-1 items-center justify-center border-l border-line md:flex"
+            className="hidden flex-1 items-center justify-center md:flex"
           />
 
-          <div className="ml-auto flex items-center gap-1 border-l border-line px-2 md:ml-0">
+          <div className="ml-auto flex items-center gap-1 px-2 md:ml-0">
             <LocaleSwitcher />
-            <span aria-hidden className="mx-1 h-5 w-px bg-line" />
             <ThemeToggle label={tTheme("toggle")} />
             <MobileMenu
               items={items}

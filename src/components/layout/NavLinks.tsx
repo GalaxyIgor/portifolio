@@ -49,10 +49,10 @@ export function NavLinks({ items, label, className = "" }: Props) {
               <Link
                 href={{ pathname: "/", hash: item.id }}
                 aria-current={isActive ? "true" : undefined}
-                className="flex items-center gap-1.5 label-hud text-muted transition-colors hover:text-ink aria-[current]:text-ink"
+                className="ritual-link flex items-center gap-1.5 label-hud text-muted aria-[current]:text-ink"
               >
                 <Sparkle
-                  className={`size-2 text-accent transition-[opacity,transform] duration-300 ${isActive ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
+                  className={`nav-star size-2 text-accent transition-[opacity,transform] duration-200 ${isActive ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
                 />
                 {item.label}
               </Link>
