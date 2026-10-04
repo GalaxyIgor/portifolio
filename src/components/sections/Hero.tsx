@@ -26,15 +26,16 @@ export async function Hero() {
   return (
     <section
       data-theme="dark"
+      data-hero
       aria-labelledby="hero-title"
-      className="relative isolate h-[calc(100svh-4rem)] min-h-[36rem] overflow-hidden text-ink"
+      className="relative isolate -mt-20 h-svh min-h-[40rem] overflow-hidden text-ink"
     >
       <HeroVisual name={profile.name} imageAlt={t("imageAlt")} />
 
-      <div className="pointer-events-none relative z-10 container-page flex h-full flex-col py-6 md:py-8">
+      <div className="pointer-events-none relative z-10 container-page flex h-full flex-col pt-24 pb-6 md:pb-8">
         {/* Faixa superior, como "MEDIEVAL POSTER ✦—✦ MEDIEVAL POSTER" */}
         <div
-          className="flex rise items-center gap-4 label-hud"
+          className="hidden rise items-center gap-4 label-hud sm:flex"
           style={delay(50)}
         >
           <span>{t("label")}</span>

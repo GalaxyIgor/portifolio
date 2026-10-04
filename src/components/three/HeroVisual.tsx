@@ -99,7 +99,7 @@ export function HeroVisual({ name, imageAlt }: Props) {
 
       <h1
         id="hero-title"
-        className={`absolute inset-x-0 top-[30%] -translate-y-1/2 text-center font-display text-[clamp(6rem,30vw,24rem)] leading-none text-[#ece6da] transition-opacity duration-700 select-none portrait:top-[17%] ${showScene ? "opacity-0" : "opacity-100"}`}
+        className={`absolute inset-x-0 top-[34%] -translate-y-1/2 text-center font-display text-[clamp(6rem,30vw,24rem)] leading-none text-[#ece6da] transition-opacity duration-700 select-none portrait:top-[20%] ${showScene ? "opacity-0" : "opacity-100"}`}
       >
         {name}
       </h1>

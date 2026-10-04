@@ -18,8 +18,10 @@
   color-scheme: light;
 }
 
-/* Escuro (padrão): pôster preto, osso e sangue */
-[data-theme="dark"] {
+/* Escuro (padrão): pôster preto, osso e sangue.
+   A navbar também usa estes tokens enquanto está sobre a pintura do hero. */
+[data-theme="dark"],
+html:has([data-hero]) .site-header:not([data-past-hero]) {
   --bg: #0a0a0a;
   --surface: #141313;
   --ink: #d9d4c7;
@@ -168,5 +170,29 @@
   @media (prefers-reduced-motion: no-preference) {
     animation: rise 0.9s var(--ease-out-quint) both;
     animation-delay: var(--delay, 0ms);
+  }
+}
+
+/* Navbar: painel de HUD com o mesmo vidro da barra de baixo do hero.
+   Sobre a pintura fica translúcida; depois dela, mais opaca e no tema da página. */
+.site-header {
+  color: var(--ink);
+}
+
+.site-bar {
+  background: color-mix(in oklab, var(--bg) 82%, transparent);
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease;
+}
+
+html:has([data-hero]) .site-header:not([data-past-hero]) .site-bar {
+  background: rgb(10 10 10 / 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-bar {
+    transition: none;
   }
 }

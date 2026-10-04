@@ -2,6 +2,8 @@
 
 import { useEffect, useId, useState } from "react";
 import { Link } from "@/i18n/navigation";
+import { HudBox } from "@/components/ui/HudBox";
+import { Sparkle } from "@/components/ui/Sparkle";
 import type { SectionId } from "./navItems";
 
 type Props = {
@@ -11,6 +13,7 @@ type Props = {
   navLabel: string;
 };
 
+/** Menu do celular: um segundo painel de HUD logo abaixo da barra. */
 export function MobileMenu({ items, openLabel, closeLabel, navLabel }: Props) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
@@ -30,14 +33,14 @@ export function MobileMenu({ items, openLabel, closeLabel, navLabel }: Props) {
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? closeLabel : openLabel}
-        className="grid size-9 place-items-center rounded-md text-ink hover:bg-surface"
+        className="grid size-9 place-items-center text-ink transition-colors hover:text-accent"
       >
         <svg
           viewBox="0 0 24 24"
           className="size-5"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.75"
+          strokeWidth="1.5"
           strokeLinecap="round"
           aria-hidden
         >
@@ -49,27 +52,34 @@ export function MobileMenu({ items, openLabel, closeLabel, navLabel }: Props) {
         </svg>
       </button>
 
-      <nav
-        id={panelId}
-        aria-label={navLabel}
+      <div
         hidden={!open}
-        className="absolute inset-x-0 top-16 border-b border-line bg-bg"
+        className="absolute inset-x-0 top-[calc(100%+0.5rem)]"
       >
-        <ul className="container-page flex flex-col py-4">
-          {items.map((item) => (
-            <li key={item.id}>
-              <Link
-                href={{ pathname: "/", hash: item.id }}
-                onClick={() => setOpen(false)}
-                className="flex items-baseline justify-between border-b border-line/60 py-4 font-display text-3xl"
-              >
-                {item.label}
-                <span className="label-hud text-muted">§ {item.id}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+        <HudBox className="bg-bg/95 backdrop-blur-sm">
+          <nav id={panelId} aria-label={navLabel}>
+            <ul className="flex flex-col px-4 py-2">
+              {items.map((item) => (
+                <li
+                  key={item.id}
+                  className="border-b border-line last:border-b-0"
+                >
+                  <Link
+                    href={{ pathname: "/", hash: item.id }}
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-between py-3 font-display text-3xl transition-colors hover:text-accent"
+                  >
+                    {item.label}
+                    <span className="flex items-center gap-1.5 label-hud text-muted">
+                      <Sparkle className="size-2 text-accent" />#{item.id}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </HudBox>
+      </div>
     </div>
   );
 }

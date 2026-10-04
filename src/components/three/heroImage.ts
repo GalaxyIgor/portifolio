@@ -21,7 +21,7 @@ export const HERO_IMAGE = {
 
 /**
  * Tamanho e posição do nome. Usado pelo canvas e espelhado no CSS do <h1>
- * (font-size: clamp(6rem, 30vw, 24rem); top: 30%, ou 17% em retrato)
+ * (font-size: clamp(6rem, 30vw, 24rem); top: 34%, ou 20% em retrato)
  * para a troca entre os dois não pular. Em retrato o cavaleiro ocupa o
  * centro da tela, então o nome sobe para o céu acima do elmo.
  */
@@ -29,6 +29,6 @@ export function NAME_LAYOUT(width: number, height: number) {
   const portrait = height > width;
   return {
     fontSize: Math.min(Math.max(width * 0.3, 96), 384),
-    centerY: height * (portrait ? 0.17 : 0.3),
+    centerY: height * (portrait ? 0.2 : 0.34),
   };
 }
