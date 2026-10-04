@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfólio — Igor
 
-## Getting Started
+Portfólio frontend com estética de pôster _dark fantasy_: o nome em letra medieval, um elmo de cavaleiro cromado em 3D na frente das letras, rosas e pétalas caindo.
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router, SSG) · React 19 · TypeScript · Tailwind CSS v4 · React Three Fiber · Motion · next-intl (PT/EN) · MDX · Vitest · Playwright
+
+## Rodando
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # build de produção (todas as páginas estáticas)
+npm run typecheck
+npm run lint
+npm test           # Vitest
+npm run test:e2e   # Playwright (sobe o dev server sozinho)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Onde editar o conteúdo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Todo o conteúdo de exemplo está marcado com `TODO(Igor)`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| O quê                                         | Arquivo                                   |
+| --------------------------------------------- | ----------------------------------------- |
+| Nome, e-mail, domínio, redes, foto, currículo | `src/data/profile.ts`                     |
+| Skills                                        | `src/data/skills.ts`                      |
+| Experiência                                   | `src/data/experience.ts`                  |
+| Projetos (metadados)                          | `src/data/projects.ts`                    |
+| Estudos de caso                               | `src/content/projects/{pt,en}/<slug>.mdx` |
+| Textos da interface                           | `src/messages/{pt,en}.json`               |
 
-## Learn More
+- **Foto:** coloque em `public/images/` e aponte `profile.photo`.
+- **Currículo:** coloque os PDFs em `public/` e preencha `profile.cv`. Sem arquivo, o botão fica escondido.
+- **Capa de projeto:** opcional (`cover` em `projects.ts`). Sem capa, o card mostra um ícone de linha.
 
-To learn more about Next.js, take a look at the following resources:
+## A cena 3D
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Fica em `src/components/three/` e é toda procedural, sem baixar nenhum modelo:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `KnightHelm.tsx`: elmo feito com `LatheGeometry`.
+- `roseGeometry.ts` + `Roses.tsx`: rosas com pétalas em espiral pelo ângulo áureo, uma geometria por rosa.
+- `Thorns.tsx`: ramo de espinhos em espiral.
+- `Petals.tsx`: pétalas caindo, num único `InstancedMesh`.
+- `HeroVisual.tsx`: só carrega o Three.js se o aparelho aguenta, pausa o render fora da tela e mostra `KnightFallback.tsx` (SVG estático) quando não há WebGL, quando o usuário prefere menos movimento ou com economia de dados.
 
-## Deploy on Vercel
+Para usar um modelo `.glb` de cavaleiro no lugar do elmo, troque `<KnightHelm />` em `KnightScene.tsx` por um componente com `useGLTF`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Conecte o repositório na Vercel e ajuste `profile.siteUrl` com o domínio final, que é usado no sitemap, nos metadados e no Open Graph.

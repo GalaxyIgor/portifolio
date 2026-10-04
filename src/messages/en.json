@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "Igor — Frontend Developer",
+    "description": "Portfolio of Igor, frontend developer. Fast, accessible web interfaces with care for detail."
+  },
+  "nav": {
+    "skip": "Skip to content",
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "primary": "Main navigation"
+  },
+  "theme": {
+    "toggle": "Toggle light/dark theme"
+  },
+  "locale": {
+    "label": "Language",
+    "pt": "Português",
+    "en": "English"
+  },
+  "hero": {
+    "label": "Portfolio",
+    "role": "Frontend developer",
+    "thesis": "I build web interfaces that load fast, work with a keyboard and feel good to use.",
+    "craft": "Craft",
+    "arsenal": "Arsenal",
+    "arsenalList": "React · Next.js · TypeScript · Three.js",
+    "status": "Open to opportunities",
+    "ctaProjects": "See projects",
+    "ctaContact": "Get in touch",
+    "ctaCv": "Download résumé"
+  },
+  "about": {
+    "title": "About",
+    "p1": "I'm a frontend developer who enjoys the part of the job between design and code: turning a layout into something that responds well to touch, to a keyboard and to a bad connection.",
+    "p2": "I work mostly with React, Next.js and TypeScript, and I care about accessibility, performance and code that still reads well six months from now.",
+    "facts": {
+      "location": "Location",
+      "locationValue": "Brazil",
+      "focus": "Focus",
+      "focusValue": "Interfaces, design systems and motion",
+      "status": "Status",
+      "statusValue": "Open to opportunities"
+    },
+    "photoAlt": "Photo of Igor"
+  },
+  "skills": {
+    "title": "Skills",
+    "intro": "Tools I use day to day, grouped by the job they do."
+  },
+  "projects": {
+    "title": "Projects",
+    "intro": "A selection of work, each with the problem, the technical decisions and the outcome.",
+    "featured": "Featured",
+    "viewAll": "See all projects",
+    "viewCase": "Read case study",
+    "filterLabel": "Filter by technology",
+    "filterAll": "All",
+    "empty": "No project uses this technology yet. Pick another filter.",
+    "back": "Back to projects",
+    "year": "Year",
+    "role": "Role",
+    "stack": "Stack",
+    "links": "Links",
+    "demo": "View demo",
+    "code": "View code",
+    "next": "Next project"
+  },
+  "experience": {
+    "title": "Experience",
+    "present": "present"
+  },
+  "contact": {
+    "title": "Contact",
+    "body": "Have a role, a project or just want to talk shop? My inbox is open.",
+    "copy": "Copy email",
+    "copied": "Email copied",
+    "copyFailed": "Couldn't copy. Select the email manually.",
+    "elsewhere": "Also on"
+  },
+  "footer": {
+    "built": "Built with Next.js, Three.js and Tailwind CSS.",
+    "top": "Back to top"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This address doesn't exist or has moved.",
+    "back": "Back to home"
+  }
+}

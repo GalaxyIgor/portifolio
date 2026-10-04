@@ -1,0 +1,19 @@
+{/* TODO(Igor): sample content. Replace with your own case study. */}
+
+## Problem
+
+I wanted to explore WebGL without leaving out people on modest devices or who prefer less motion.
+
+## Solution
+
+A navigable 3D gallery with React Three Fiber and an HTML/CSS version that kicks in automatically when 3D isn't a good idea.
+
+## Technical decisions
+
+- Procedural geometry instead of heavy models.
+- Rendering pauses when the scene leaves the viewport.
+- Checks for `prefers-reduced-motion` and WebGL support before loading Three.js.
+
+## Outcome
+
+The 3D experience shows up where it runs well, and everyone else gets a light version with the same content.

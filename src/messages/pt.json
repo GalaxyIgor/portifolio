@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "Igor — Desenvolvedor Frontend",
+    "description": "Portfólio de Igor, desenvolvedor frontend. Interfaces web rápidas, acessíveis e cuidadosas com o detalhe."
+  },
+  "nav": {
+    "skip": "Pular para o conteúdo",
+    "home": "Início",
+    "about": "Sobre",
+    "skills": "Skills",
+    "projects": "Projetos",
+    "experience": "Experiência",
+    "contact": "Contato",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "primary": "Navegação principal"
+  },
+  "theme": {
+    "toggle": "Alternar tema claro/escuro"
+  },
+  "locale": {
+    "label": "Idioma",
+    "pt": "Português",
+    "en": "English"
+  },
+  "hero": {
+    "label": "Portfólio",
+    "role": "Desenvolvedor frontend",
+    "thesis": "Eu construo interfaces web que carregam rápido, funcionam no teclado e dão gosto de usar.",
+    "craft": "Ofício",
+    "arsenal": "Arsenal",
+    "arsenalList": "React · Next.js · TypeScript · Three.js",
+    "status": "Aberto a oportunidades",
+    "ctaProjects": "Ver projetos",
+    "ctaContact": "Falar comigo",
+    "ctaCv": "Baixar currículo"
+  },
+  "about": {
+    "title": "Sobre",
+    "p1": "Sou desenvolvedor frontend e gosto da parte do trabalho que fica entre o design e o código: transformar um layout em algo que responde bem ao toque, ao teclado e a uma conexão ruim.",
+    "p2": "Trabalho principalmente com React, Next.js e TypeScript, e me importo com acessibilidade, performance e com o código continuar legível daqui a seis meses.",
+    "facts": {
+      "location": "Localização",
+      "locationValue": "Brasil",
+      "focus": "Foco",
+      "focusValue": "Interfaces, design systems e animação",
+      "status": "Status",
+      "statusValue": "Aberto a oportunidades"
+    },
+    "photoAlt": "Foto de Igor"
+  },
+  "skills": {
+    "title": "Skills",
+    "intro": "Ferramentas que uso no dia a dia, agrupadas pelo papel que cumprem."
+  },
+  "projects": {
+    "title": "Projetos",
+    "intro": "Uma seleção de trabalhos, cada um com o problema, as decisões técnicas e o resultado.",
+    "featured": "Em destaque",
+    "viewAll": "Ver todos os projetos",
+    "viewCase": "Ler estudo de caso",
+    "filterLabel": "Filtrar por tecnologia",
+    "filterAll": "Todos",
+    "empty": "Nenhum projeto usa essa tecnologia ainda. Escolha outro filtro.",
+    "back": "Voltar para projetos",
+    "year": "Ano",
+    "role": "Papel",
+    "stack": "Stack",
+    "links": "Links",
+    "demo": "Ver demo",
+    "code": "Ver código",
+    "next": "Próximo projeto"
+  },
+  "experience": {
+    "title": "Experiência",
+    "present": "atual"
+  },
+  "contact": {
+    "title": "Contato",
+    "body": "Tem uma vaga, um projeto ou só quer trocar uma ideia? Meu e-mail está aberto.",
+    "copy": "Copiar e-mail",
+    "copied": "E-mail copiado",
+    "copyFailed": "Não foi possível copiar. Selecione o e-mail manualmente.",
+    "elsewhere": "Também estou em"
+  },
+  "footer": {
+    "built": "Feito com Next.js, Three.js e Tailwind CSS.",
+    "top": "Voltar ao topo"
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "body": "Esse endereço não existe ou foi movido.",
+    "back": "Voltar para o início"
+  }
+}

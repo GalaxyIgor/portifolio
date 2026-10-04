@@ -1,26 +1,172 @@
 @import "tailwindcss";
 
+/* Tema escuro controlado pelo next-themes via atributo data-theme */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Claro: pôster de pergaminho */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #d8cfbf;
+  --surface: #e3dbcd;
+  --ink: #1b1a17;
+  --muted: #5e584e;
+  --line: #b3a893;
+  --accent: #8e1b1b;
+  --accent-ink: #e9e3d6;
+  --accent-soft: rgb(142 27 27 / 0.1);
+  --grain-opacity: 0.22;
+
+  color-scheme: light;
+}
+
+/* Escuro (padrão): pôster preto, osso e sangue */
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --surface: #141313;
+  --ink: #d9d4c7;
+  --muted: #8b867c;
+  --line: #2a2826;
+  --accent: #c1272d;
+  --accent-ink: #f1ece2;
+  --accent-soft: rgb(193 39 45 / 0.14);
+  --grain-opacity: 0.12;
+
+  color-scheme: dark;
+}
+
+/* Cores da cena 3D — iguais nos dois temas */
+:root {
+  --rose: #7d0f17;
+  --rose-deep: #3d0509;
+  --leaf: #1f2a1a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+
+  --font-display: var(--font-pirata);
+  --font-serif: var(--font-garamond);
+  --font-label: var(--font-archivo);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  --text-display: clamp(6rem, 30vw, 22rem);
+  --text-display--line-height: 0.8;
+  --text-title: clamp(3rem, 8vw, 6rem);
+  --text-title--line-height: 0.9;
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-garamond), Georgia, serif;
+    font-size: 1.125rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Grão de papel/filme sobre a página inteira */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* Scanlines de tela CRT, só no escuro */
+  [data-theme="dark"] body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 59;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0 2px,
+      rgb(0 0 0 / 0.18) 2px 3px
+    );
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Rótulo de HUD: caixa-alta pequena, larga e pesada */
+@utility label-hud {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  font-stretch: 112%;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Entrada do hero em CSS puro: não depende de JS para aparecer */
+@utility rise {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: rise 0.9s var(--ease-out-quint) both;
+    animation-delay: var(--delay, 0ms);
+  }
 }
