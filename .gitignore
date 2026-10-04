@@ -43,3 +43,7 @@ next-env.d.ts
 # testes
 /test-results
 /playwright-report
+
+# geração local dos currículos; os PDFs publicados ficam em public/cv
+/tmp/pdfs/
+/output/pdf/

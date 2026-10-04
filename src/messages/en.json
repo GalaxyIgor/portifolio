@@ -56,7 +56,13 @@
   },
   "skills": {
     "title": "Skills",
-    "intro": "Tools I use day to day, grouped by the job they do."
+    "intro": "Tools I use day to day. Explore each skill to see the projects and experience where it appears.",
+    "projects": "Projects",
+    "experience": "Experience",
+    "connections": "Connections",
+    "choose": "Choose a skill",
+    "hint": "Hover, use the keyboard or tap a skill to explore its connections.",
+    "empty": "No projects or experience have been linked to this skill yet."
   },
   "projects": {
     "gallery": {

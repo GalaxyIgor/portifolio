@@ -5,6 +5,7 @@ import { certifications } from "@/data/certifications";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Sparkle } from "@/components/ui/Sparkle";
+import { SkillLinks } from "@/components/ui/SkillLinks";
 
 export async function Experience() {
   const t = await getTranslations("experience");
@@ -38,7 +39,7 @@ export async function Experience() {
                 t("present")
               )}
             </p>
-            <div>
+            <div id={`experience-${item.id}`} className="experience-entry">
               <h3 className="mt-2 font-display text-4xl md:mt-0">
                 {item.role[locale]}
               </h3>
@@ -46,6 +47,11 @@ export async function Experience() {
               <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted">
                 {item.summary[locale]}
               </p>
+              {item.stack?.length ? (
+                <div className="mt-4">
+                  <SkillLinks stack={item.stack} />
+                </div>
+              ) : null}
             </div>
           </Reveal>
         ))}

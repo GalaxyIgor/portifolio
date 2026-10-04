@@ -333,6 +333,40 @@ html::-webkit-scrollbar {
   box-shadow: 0 16px 80px rgb(0 0 0 / 0.6);
 }
 
+.skill-slot {
+  position: relative;
+  scroll-margin-top: 7rem;
+  transition: border-color 200ms;
+}
+
+.skill-selector[aria-pressed="true"],
+.skill-slot:target .skill-selector {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.skill-selector {
+  overflow-wrap: anywhere;
+}
+
+.skill-connections-panel {
+  scroll-margin-top: 7rem;
+  overflow-wrap: anywhere;
+}
+
+.experience-entry {
+  scroll-margin-top: 7rem;
+}
+
+.experience-entry:target h3 {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-slot {
+    transition: none;
+  }
+}
 
 .gallery-dialog::backdrop {
   background: rgb(0 0 0 / 0.8);

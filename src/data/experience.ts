@@ -1,7 +1,9 @@
 import type { Locale } from "@/i18n/routing";
 
 export type ExperienceItem = {
+  id: string;
   company: string;
+  stack?: string[];
   start: string; // AAAA-MM
   end: string | null; // null = atual
   role: Record<Locale, string>;
@@ -11,7 +13,9 @@ export type ExperienceItem = {
 // Mais recente primeiro.
 export const experience: ExperienceItem[] = [
   {
+    id: "upvox",
     company: "Upvox",
+    stack: ["Next.js", "React Native", "TypeScript"],
     start: "2026-08",
     end: null,
     role: { pt: "Estagiário Next.js", en: "Next.js Intern" },
@@ -21,7 +25,9 @@ export const experience: ExperienceItem[] = [
     },
   },
   {
+    id: "robotbulls",
     company: "Robotbulls",
+    stack: ["C"],
     start: "2023-02",
     end: "2024-06",
     role: { pt: "Desenvolvedor C (voluntário)", en: "C Developer (volunteer)" },
@@ -31,6 +37,7 @@ export const experience: ExperienceItem[] = [
     },
   },
   {
+    id: "inatel",
     company: "Inatel — Instituto Nacional de Telecomunicações",
     start: "2022-02",
     end: "2027-12",
@@ -44,7 +51,9 @@ export const experience: ExperienceItem[] = [
     },
   },
   {
+    id: "madeireira-uniao",
     company: "Madeireira União",
+    stack: ["Microsoft Office"],
     start: "2020-01",
     end: "2022-12",
     role: { pt: "Assistente administrativo", en: "Administrative Assistant" },

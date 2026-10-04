@@ -1,44 +1,48 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { skillGroups } from "@/data/skills";
+import { skillGroups, skillDescriptions } from "@/data/skills";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Reveal } from "@/components/ui/Reveal";
-import { HudBox } from "@/components/ui/HudBox";
-import { Sparkle } from "@/components/ui/Sparkle";
+import { getSkillConnections, skillAnchor } from "@/lib/skillConnections";
+import { SkillInventory } from "./SkillInventory";
 
-/** Skills como um inventário de RPG: cada grupo é uma caixa, cada ferramenta um slot. */
 export async function Skills() {
   const t = await getTranslations("skills");
   const locale = (await getLocale()) as Locale;
-
+  const groups = skillGroups.map((group) => ({
+    id: group.id,
+    label: group.label[locale],
+    items: group.items.map((name) => {
+      const connections = getSkillConnections(name);
+      return {
+        id: skillAnchor(name),
+        name,
+        description: skillDescriptions[name]?.[locale] ?? "",
+        projects: connections.projects.map((project) => ({
+          slug: project.slug,
+          title: project.title[locale],
+        })),
+        experience: connections.experience.map((entry) => ({
+          id: entry.id,
+          company: entry.company,
+          role: entry.role[locale],
+        })),
+      };
+    }),
+  }));
   return (
     <section id="skills" className="container-page py-14 md:py-16">
       <SectionHeading id="skills" title={t("title")} intro={t("intro")} />
-      <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {skillGroups.map((group, i) => (
-          <Reveal as="li" key={group.id} delay={i * 0.05}>
-            <HudBox className="h-full p-5">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="font-display text-3xl">{group.label[locale]}</h3>
-                <span className="label-hud text-muted">
-                  {String(group.items.length).padStart(2, "0")}
-                </span>
-              </div>
-              <ul className="grid grid-cols-2 gap-2">
-                {group.items.map((item) => (
-                  <li
-                    key={item}
-                    className="flex min-h-14 items-center gap-2 rounded-[3px] border border-line bg-surface/60 px-3 py-2 text-base leading-tight transition-colors hover:border-accent"
-                  >
-                    <Sparkle className="size-2 shrink-0 text-accent" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </HudBox>
-          </Reveal>
-        ))}
-      </ul>
+      <SkillInventory
+        groups={groups}
+        labels={{
+          connections: t("connections"),
+          projects: t("projects"),
+          experience: t("experience"),
+          choose: t("choose"),
+          hint: t("hint"),
+          empty: t("empty"),
+        }}
+      />
     </section>
   );
 }

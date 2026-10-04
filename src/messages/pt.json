@@ -56,7 +56,13 @@
   },
   "skills": {
     "title": "Skills",
-    "intro": "Ferramentas que uso no dia a dia, agrupadas pelo papel que cumprem."
+    "intro": "Ferramentas que uso no dia a dia. Explore cada skill para ver os projetos e as experiências em que ela aparece.",
+    "projects": "Projetos",
+    "experience": "Experiência",
+    "connections": "Conexões",
+    "choose": "Escolha uma skill",
+    "hint": "Passe o mouse, use o teclado ou toque em uma skill para explorar suas conexões.",
+    "empty": "Ainda não há projetos ou experiências associados a esta skill."
   },
   "projects": {
     "gallery": {

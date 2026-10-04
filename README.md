@@ -31,6 +31,8 @@ Todo o conteúdo de exemplo está marcado com `TODO(Igor)`.
 
 - **Foto:** coloque em `public/images/` e aponte `profile.photo`.
 - **Currículo:** coloque os PDFs em `public/` e preencha `profile.cv`. Sem arquivo, o botão fica escondido.
+- **Conexões das skills:** os projetos usam `stack` e as experiências usam `stack` em `src/data/experience.ts`. Os nomes iguais ligam as tecnologias às skills automaticamente; as descrições ficam em `src/data/skills.ts`.
+- **Gerar o CV:** os PDFs PT/EN em `public/cv/` usam os dados do portfólio. Para atualizá-los, execute `node scripts/cv-data.mjs > tmp/pdfs/cv-data.json` e `python scripts/generate-cv.py tmp/pdfs/cv-data.json` (requer ReportLab apenas para gerar os arquivos). Crie `tmp/pdfs/` antes do primeiro uso e copie os PDFs de `output/pdf/` para `public/cv/`. Não é necessário Python para executar ou publicar o site.
 - **Capa de projeto:** opcional (`cover` em `projects.ts`). Sem capa, o card mostra um ícone de linha.
 
 ## O hero em parallax
@@ -54,8 +56,17 @@ Fica em `src/components/three/`. Uma imagem e o seu mapa de profundidade aliment
    ```
 
    O mapa sai com dois canais. O R tem borda firme, encaixada na pintura por um _guided filter_, e decide o que encobre o nome. O G é suavizado e serve só para o deslocamento, para não repuxar as bordas.
+
 3. Atualize `heroImage.ts`: caminhos, `width`/`height`, `focus` e `textDepth`. O `textDepth` precisa ficar entre a profundidade do fundo e a do personagem.
 
 ## Deploy
 
-Conecte o repositório na Vercel e ajuste `profile.siteUrl` com o domínio final, que é usado no sitemap, nos metadados e no Open Graph.
+O domínio público configurado é `https://portifolio-delta-one-12.vercel.app`. Para trocar de domínio, defina `NEXT_PUBLIC_SITE_URL` na Vercel com a URL de origem, sem `/pt` ou `/en`. Ela é usada no sitemap, nos links canônicos e nos metadados de compartilhamento.
+
+A prévia de compartilhamento é gerada em `/{locale}/opengraph-image`, com 1200 × 630 pixels, textos localizados e a fonte Pirata One (licença em `public/fonts/PirataOne-OFL.txt`). A pintura usa uma versão JPEG local, pois o renderizador não aceita WebP. Ao trocar o hero, atualize `public/hero/knight-share.jpg`:
+
+```bash
+node -e 'require("sharp")("public/hero/knight.webp").resize(1200,630,{fit:"cover"}).jpeg({quality:85,mozjpeg:true}).toFile("public/hero/knight-share.jpg")'
+```
+
+Depois do deploy, as plataformas podem precisar atualizar o cache de uma prévia já compartilhada.

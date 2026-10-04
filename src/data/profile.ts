@@ -9,7 +9,10 @@ export const profile = {
     "https://portifolio-delta-one-12.vercel.app"
   ).replace(/\/$/, ""),
   // Coloque os PDFs em /public e informe o caminho. null esconde o botão.
-  cv: { pt: null, en: null } as Record<Locale, string | null>,
+  cv: { pt: "/cv/igor-cv-pt.pdf", en: "/cv/igor-cv-en.pdf" } as Record<
+    Locale,
+    string | null
+  >,
   // Caminho da foto em /public. null mostra o monograma.
   photo: "/igor.webp" as string | null,
   socials: [

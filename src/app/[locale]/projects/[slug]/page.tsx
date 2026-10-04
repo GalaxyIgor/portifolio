@@ -10,6 +10,7 @@ import { ProjectGallery } from "@/components/sections/ProjectGallery";
 import { Sparkle } from "@/components/ui/Sparkle";
 import { buttonClasses } from "@/components/ui/button";
 import { profile } from "@/data/profile";
+import { SkillLinks } from "@/components/ui/SkillLinks";
 
 export const dynamicParams = false;
 
@@ -108,7 +109,9 @@ export default async function CaseStudyPage({
             </div>
             <div className="sm:col-span-2">
               <dt className="label-hud text-muted">{t("stack")}</dt>
-              <dd className="mt-1 text-lg">{project.stack.join(" · ")}</dd>
+              <dd className="mt-2 text-lg">
+                <SkillLinks stack={project.stack} />
+              </dd>
             </div>
           </dl>
 
