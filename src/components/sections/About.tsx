@@ -16,7 +16,10 @@ export async function About() {
   ];
 
   return (
-    <section id="about" className="container-page py-24 md:py-36">
+    <section
+      id="about"
+      className="container-page pt-16 pb-24 md:pt-20 md:pb-36"
+    >
       <SectionHeading id="about" title={t("title")} />
       <div className="grid gap-12 md:grid-cols-[minmax(0,22rem)_1fr] md:gap-20">
         <Reveal className="mx-auto w-full max-w-[18rem] md:max-w-none">
