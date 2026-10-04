@@ -47,7 +47,9 @@
       "focus": "Focus",
       "focusValue": "Interfaces, design systems and motion",
       "status": "Status",
-      "statusValue": "Open to opportunities"
+      "statusValue": "Open to opportunities",
+      "languages": "Languages",
+      "languagesValue": "Native Portuguese · Intermediate English · Basic Spanish and German"
     },
     "photoAlt": "Photo of Igor"
   },
@@ -75,7 +77,8 @@
   },
   "experience": {
     "title": "Experience",
-    "present": "present"
+    "present": "present",
+    "certifications": "Certifications"
   },
   "contact": {
     "title": "Contact",

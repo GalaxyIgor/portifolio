@@ -8,42 +8,49 @@ export type ExperienceItem = {
   summary: Record<Locale, string>;
 };
 
-// TODO(Igor): substitua pelos seus cargos reais (mais recente primeiro).
+// Mais recente primeiro.
 export const experience: ExperienceItem[] = [
   {
-    company: "Empresa Atual",
-    start: "2024-03",
+    company: "Upvox",
+    start: "2026-08",
     end: null,
-    role: { pt: "Desenvolvedor Frontend", en: "Frontend Developer" },
+    role: { pt: "Estagiário Next.js", en: "Next.js Intern" },
     summary: {
-      pt: "Descreva aqui o produto, seu papel e uma ou duas entregas de que você se orgulha.",
-      en: "Describe the product, your role and one or two things you shipped and are proud of.",
+      pt: "Desenvolvimento web e mobile com Next.js, React Native e TypeScript.",
+      en: "Web and mobile development with Next.js, React Native and TypeScript.",
     },
   },
   {
-    company: "Empresa Anterior",
-    start: "2022-06",
-    end: "2024-02",
-    role: {
-      pt: "Desenvolvedor Frontend Júnior",
-      en: "Junior Frontend Developer",
-    },
+    company: "Robotbulls",
+    start: "2023-02",
+    end: "2024-06",
+    role: { pt: "Desenvolvedor C (voluntário)", en: "C Developer (volunteer)" },
     summary: {
-      pt: "Mesma ideia: contexto, responsabilidade e impacto em poucas linhas.",
-      en: "Same idea: context, responsibility and impact in a few lines.",
+      pt: "Programação em C na equipe de robótica.",
+      en: "C programming for the robotics team.",
     },
   },
   {
-    company: "Sua Faculdade",
-    start: "2019-02",
-    end: "2023-12",
+    company: "Inatel — Instituto Nacional de Telecomunicações",
+    start: "2022-02",
+    end: "2027-12",
     role: {
-      pt: "Graduação em Ciência da Computação",
-      en: "B.Sc. in Computer Science",
+      pt: "Bacharelado em Engenharia da Computação",
+      en: "B.Eng. in Computer Engineering",
     },
     summary: {
-      pt: "Formação, cursos ou certificações relevantes.",
-      en: "Degree, courses or relevant certifications.",
+      pt: "Formação em engenharia, programação orientada a objetos e fundamentos de computação. Conclusão prevista para dez. de 2027.",
+      en: "Engineering, object-oriented programming and computing fundamentals. Expected graduation in Dec 2027.",
+    },
+  },
+  {
+    company: "Madeireira União",
+    start: "2020-01",
+    end: "2022-12",
+    role: { pt: "Assistente administrativo", en: "Administrative Assistant" },
+    summary: {
+      pt: "Controle de inventário e rotinas administrativas com Microsoft Office.",
+      en: "Inventory control and administrative routines with Microsoft Office.",
     },
   },
 ];

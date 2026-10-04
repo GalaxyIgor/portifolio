@@ -13,6 +13,7 @@ export async function About() {
     { label: t("facts.location"), value: t("facts.locationValue") },
     { label: t("facts.focus"), value: t("facts.focusValue") },
     { label: t("facts.status"), value: t("facts.statusValue") },
+    { label: t("facts.languages"), value: t("facts.languagesValue") },
   ];
 
   return (
@@ -47,7 +48,7 @@ export async function About() {
           </Reveal>
           <Reveal delay={0.1}>
             <HudBox className="mt-14">
-              <dl className="grid divide-line sm:grid-cols-3 sm:divide-x">
+              <dl className="grid sm:grid-cols-2 [&>*]:border-line sm:[&>:nth-child(odd)]:border-r sm:[&>:nth-child(-n+2)]:border-b">
                 {facts.map((fact) => (
                   <div key={fact.label} className="px-5 py-4">
                     <dt className="label-hud text-muted">{fact.label}</dt>

@@ -1,6 +1,7 @@
 import { getFormatter, getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { experience } from "@/data/experience";
+import { certifications } from "@/data/certifications";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Sparkle } from "@/components/ui/Sparkle";
@@ -49,6 +50,31 @@ export async function Experience() {
           </Reveal>
         ))}
       </ol>
+
+      <Reveal className="mt-20 md:mt-24">
+        <h3 className="mb-8 font-display text-4xl">{t("certifications")}</h3>
+        <ul className="grid gap-x-10 border-t border-line sm:grid-cols-2">
+          {certifications.map((cert) => (
+            <li
+              key={cert.name}
+              className="flex items-baseline justify-between gap-4 border-b border-line py-4"
+            >
+              <div>
+                <p className="text-lg">{cert.name}</p>
+                <p className="text-accent italic">{cert.issuer}</p>
+              </div>
+              {cert.date && (
+                <time
+                  dateTime={cert.date}
+                  className="shrink-0 label-hud text-muted"
+                >
+                  {date(cert.date)}
+                </time>
+              )}
+            </li>
+          ))}
+        </ul>
+      </Reveal>
     </section>
   );
 }
