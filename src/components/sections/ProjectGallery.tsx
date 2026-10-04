@@ -125,7 +125,7 @@ function GalleryViewer({
                   setSelected(index);
                 }}
               >
-                <PosterFrame className="aspect-[16/10]">
+                <PosterFrame vines className="aspect-[16/10]">
                   {thumbnail && (
                     <Image
                       src={thumbnail}

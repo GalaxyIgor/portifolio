@@ -21,7 +21,7 @@ export async function About() {
       <SectionHeading id="about" title={t("title")} />
       <div className="grid gap-12 md:grid-cols-[minmax(0,22rem)_1fr] md:gap-20">
         <Reveal className="mx-auto w-full max-w-[18rem] md:max-w-none">
-          <PosterFrame className="aspect-[3/4]">
+          <PosterFrame vines className="aspect-[3/4]">
             {profile.photo ? (
               <Image
                 src={profile.photo}

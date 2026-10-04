@@ -4,8 +4,8 @@ import { experience } from "@/data/experience";
 import { certifications } from "@/data/certifications";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { Sparkle } from "@/components/ui/Sparkle";
 import { SkillLinks } from "@/components/ui/SkillLinks";
+import { ExperienceStep } from "./ExperienceStep";
 
 export async function Experience() {
   const t = await getTranslations("experience");
@@ -22,23 +22,21 @@ export async function Experience() {
     <section id="experience" className="container-page py-14 md:py-16">
       <SectionHeading id="experience" title={t("title")} />
       <ol className="relative ml-2 border-l border-line">
-        {experience.map((item, i) => (
-          <Reveal
-            as="li"
+        {experience.map((item) => (
+          <ExperienceStep
             key={`${item.company}-${item.start}`}
-            delay={i * 0.05}
-            className="relative pb-16 pl-8 last:pb-0 md:grid md:grid-cols-[12rem_1fr] md:gap-10 md:pl-12"
+            date={
+              <>
+                <time dateTime={item.start}>{date(item.start)}</time>
+                {" — "}
+                {item.end ? (
+                  <time dateTime={item.end}>{date(item.end)}</time>
+                ) : (
+                  t("present")
+                )}
+              </>
+            }
           >
-            <Sparkle className="absolute top-1 -left-[9px] size-[18px] bg-bg text-accent" />
-            <p className="pt-1 label-hud text-muted">
-              <time dateTime={item.start}>{date(item.start)}</time>
-              {" — "}
-              {item.end ? (
-                <time dateTime={item.end}>{date(item.end)}</time>
-              ) : (
-                t("present")
-              )}
-            </p>
             <div id={`experience-${item.id}`} className="experience-entry">
               <h3 className="mt-2 font-display text-4xl md:mt-0">
                 {item.role[locale]}
@@ -53,20 +51,22 @@ export async function Experience() {
                 </div>
               ) : null}
             </div>
-          </Reveal>
+          </ExperienceStep>
         ))}
       </ol>
 
-      <Reveal className="mt-20 md:mt-24">
+      <div className="mt-20 md:mt-24">
         <h3 className="mb-8 font-display text-4xl">{t("certifications")}</h3>
         <ul className="grid gap-x-10 border-t border-line sm:grid-cols-2">
-          {certifications.map((cert) => (
-            <li
+          {certifications.map((cert, index) => (
+            <Reveal
+              as="li"
               key={cert.name}
-              className="flex items-baseline justify-between gap-4 border-b border-line py-4"
+              delay={(index % 2) * 0.06}
+              className="certification-row relative flex items-baseline justify-between gap-4 border-b border-line py-4"
             >
               <div>
-                <p className="text-lg">{cert.name}</p>
+                <p className="certification-name text-lg">{cert.name}</p>
                 <p className="text-accent italic">{cert.issuer}</p>
               </div>
               {cert.date && (
@@ -77,10 +77,10 @@ export async function Experience() {
                   {date(cert.date)}
                 </time>
               )}
-            </li>
+            </Reveal>
           ))}
         </ul>
-      </Reveal>
+      </div>
     </section>
   );
 }

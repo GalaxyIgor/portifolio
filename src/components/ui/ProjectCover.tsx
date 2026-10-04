@@ -29,7 +29,7 @@ export function ProjectCover({ slug, title, cover, priority }: Props) {
   const Icon = icons[fallbackIcons[hash(slug) % fallbackIcons.length]];
 
   return (
-    <PosterFrame className="project-cover aspect-[4/5]">
+    <PosterFrame vines className="project-cover aspect-[4/5]">
       {cover ? (
         <Image
           src={cover}

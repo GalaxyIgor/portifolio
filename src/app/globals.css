@@ -362,6 +362,140 @@ html::-webkit-scrollbar {
   color: var(--accent);
 }
 
+.experience-step::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0.5rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--accent);
+  opacity: 0.65;
+  transform-origin: top;
+}
+
+.experience-step:last-child::before {
+  bottom: auto;
+  height: 1rem;
+}
+
+.experience-entry h3,
+.experience-date {
+  transition: color 250ms ease;
+}
+
+.experience-entry {
+  transition: transform 300ms var(--ease-out-quint);
+}
+
+.experience-marker svg {
+  transition:
+    transform 400ms var(--ease-out-quint),
+    filter 300ms ease;
+}
+
+.experience-step:focus-within .experience-entry h3,
+.experience-step:focus-within .experience-date {
+  color: var(--accent);
+}
+
+.experience-step:focus-within .experience-marker svg {
+  transform: rotate(45deg) scale(1.12);
+  filter: drop-shadow(0 0 5px var(--accent-soft));
+}
+
+.certification-row::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms var(--ease-out-quint);
+}
+
+.certification-name {
+  transition:
+    color 250ms ease,
+    transform 300ms var(--ease-out-quint);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .experience-step::before {
+    transform: scaleY(0);
+    transition: transform 650ms var(--ease-out-quint);
+  }
+
+  .experience-date,
+  .experience-content,
+  .experience-marker {
+    opacity: 0;
+    transition:
+      opacity 400ms ease,
+      transform 500ms var(--ease-out-quint);
+  }
+
+  .experience-date {
+    transform: translateX(-8px);
+  }
+  .experience-content {
+    transform: translateX(14px);
+    transition-delay: 100ms;
+  }
+  .experience-marker {
+    transform: rotate(-45deg) scale(0.65);
+    transition-delay: 60ms;
+  }
+
+  .experience-step[data-visible="true"]::before {
+    transform: scaleY(1);
+  }
+  .experience-step[data-visible="true"]
+    :is(.experience-date, .experience-content, .experience-marker) {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .experience-step:hover .experience-entry {
+    transform: translateX(4px);
+  }
+  .experience-step:hover .experience-entry h3,
+  .experience-step:hover .experience-date,
+  .certification-row:hover .certification-name {
+    color: var(--accent);
+  }
+  .experience-step:hover .experience-marker svg {
+    transform: rotate(45deg) scale(1.12);
+    filter: drop-shadow(0 0 5px var(--accent-soft));
+  }
+  .certification-row:hover::after {
+    transform: scaleX(1);
+  }
+  .certification-row:hover .certification-name {
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-step::before,
+  .experience-entry,
+  .experience-entry h3,
+  .experience-date,
+  .experience-marker svg,
+  .certification-row::after,
+  .certification-name {
+    transition: none;
+  }
+  .experience-step:is(:hover, :focus-within) .experience-entry,
+  .experience-step:is(:hover, :focus-within) .experience-marker svg,
+  .certification-row:hover .certification-name {
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .skill-slot {
     transition: none;
@@ -665,6 +799,71 @@ html::-webkit-scrollbar {
 .project-card {
   transform: translateY(var(--card-lift, 0px));
   transition: transform 300ms var(--ease-out-quint);
+}
+
+/* Espinhos de gravura crescem pelas bordas, sem capturar cliques da capa. */
+.thorn-vine {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  color: var(--accent);
+  opacity: var(--vine-visible, 0);
+  transition: opacity 220ms ease;
+}
+
+.thorn-vine-stem {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--vine-offset, 1);
+  transition: stroke-dashoffset 650ms ease;
+}
+
+.thorn-vine-thorn {
+  fill: currentColor;
+  opacity: var(--vine-visible, 0);
+  transform: scale(var(--vine-scale, 0.65));
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 180ms ease,
+    transform 250ms ease;
+  transition-delay: calc(var(--vine-stagger, 0) * var(--thorn-delay, 0ms));
+}
+
+.project-card:has(a:focus-visible) .thorn-vine,
+.gallery-thumbnail:focus-visible .thorn-vine {
+  --vine-visible: 1;
+  --vine-offset: 0;
+  --vine-scale: 1;
+  --vine-stagger: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .thorn-vine,
+  .poster-frame-vines:hover .thorn-vine {
+    --vine-visible: 1;
+    --vine-offset: 0;
+    --vine-scale: 1;
+    --vine-stagger: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thorn-vine,
+  .thorn-vine-stem,
+  .thorn-vine-thorn {
+    transition: none;
+  }
+
+  .thorn-vine-thorn {
+    transform: none;
+  }
 }
 
 .project-card-title {
