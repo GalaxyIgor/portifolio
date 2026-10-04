@@ -43,14 +43,18 @@ test("rota desconhecida mostra o 404 localizado", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("com movimento reduzido, mostra a ilustração estática em vez do 3D", async ({
+test("com movimento reduzido, mostra a imagem estática em vez do parallax", async ({
   browser,
 }) => {
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   await page.goto("/pt");
-  // O fallback é o SVG do elmo (viewBox próprio), não os ornamentos
-  await expect(page.locator('svg[viewBox="0 0 400 460"]')).toBeVisible();
+  // Sem WebGL: imagem estática e o nome em HTML, visível
+  await expect(page.locator('section img[src*="knight"]')).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveCSS(
+    "opacity",
+    "1",
+  );
   await expect(page.locator("canvas")).toHaveCount(0);
   await context.close();
 });
