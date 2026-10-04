@@ -13,7 +13,7 @@ export async function FeaturedProjects() {
   const featured = getFeaturedProjects().slice(0, 3);
 
   return (
-    <section id="projects" className="container-page py-24 md:py-32">
+    <section id="projects" className="container-page py-14 md:py-16">
       <SectionHeading id="projects" title={t("title")} intro={t("intro")} />
       <ul className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
         {featured.map((project, i) => (

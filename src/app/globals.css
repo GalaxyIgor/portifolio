@@ -294,7 +294,7 @@ html::-webkit-scrollbar {
     opacity: 1;
   }
   100% {
-    transform: translate(-50%, 34px);
+    transform: translate(-50%, 20px);
     opacity: 0;
   }
 }

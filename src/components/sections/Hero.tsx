@@ -20,6 +20,7 @@ const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as React.CSSProperties;
  */
 export async function Hero() {
   const t = await getTranslations("hero");
+  const tNav = await getTranslations("nav");
   const locale = (await getLocale()) as Locale;
   const cv = profile.cv[locale];
   const year = new Date().getFullYear();
@@ -52,13 +53,7 @@ export async function Hero() {
             </p>
             <p className="text-lg leading-snug italic">{t("thesis")}</p>
           </div>
-          <div className="hidden justify-center md:flex">
-            <ScrollCue
-              label={t("scroll")}
-              ariaLabel={t("scrollAria")}
-              className="rise"
-            />
-          </div>
+          <div aria-hidden className="hidden md:block" />
           <div
             className="hidden rise md:block md:text-right"
             style={delay(500)}
@@ -83,6 +78,13 @@ export async function Hero() {
               {profile.name} — {year}
             </span>
             <Crosshair className="hidden size-4 text-muted sm:block" />
+          </div>
+          {/* Seta discreta no meio da barra: há mais conteúdo abaixo */}
+          <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden -translate-x-1/2 items-center md:flex">
+            <ScrollCue
+              to="about"
+              ariaLabel={tNav("goTo", { section: tNav("about") })}
+            />
           </div>
           <div className="ml-auto flex flex-wrap gap-3">
             <Link

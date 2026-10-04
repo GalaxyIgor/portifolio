@@ -58,8 +58,6 @@ export function HeroVisual({ name, imageAlt }: Props) {
     return () => observer.disconnect();
   }, []);
 
-  const [fx, fy] = HERO_IMAGE.focus;
-
   return (
     <div
       ref={container}
@@ -71,8 +69,8 @@ export function HeroVisual({ name, imageAlt }: Props) {
         fill
         priority
         sizes="100vw"
-        className="object-cover"
-        style={{ objectPosition: `${fx * 100}% ${(1 - fy) * 100}%` }}
+        // Mesmo foco do shader (HERO_IMAGE.focus): centro deitado, cavaleiro em retrato
+        className="object-cover object-[50%_50%] portrait:object-[36%_50%]"
       />
       {/* Mesma vinheta e transição do shader, para a troca não pular */}
       <div
@@ -99,7 +97,7 @@ export function HeroVisual({ name, imageAlt }: Props) {
 
       <h1
         id="hero-title"
-        className={`absolute inset-x-0 top-[34%] -translate-y-1/2 text-center font-display text-[clamp(6rem,30vw,24rem)] leading-none text-[#ece6da] transition-opacity duration-700 select-none portrait:top-[20%] ${showScene ? "opacity-0" : "opacity-100"}`}
+        className={`absolute inset-x-0 top-[34%] -translate-y-1/2 text-center font-display text-[clamp(6rem,30vw,24rem)] leading-none text-[#ece6da] transition-opacity duration-700 select-none portrait:top-[max(20%,calc(5rem_+_12.6vw))] ${showScene ? "opacity-0" : "opacity-100"}`}
       >
         {name}
       </h1>

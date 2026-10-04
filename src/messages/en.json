@@ -13,7 +13,8 @@
     "contact": "Contact",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "primary": "Main navigation"
+    "primary": "Main navigation",
+    "goTo": "Go to {section}"
   },
   "theme": {
     "toggle": "Toggle light/dark theme"
@@ -34,9 +35,7 @@
     "ctaProjects": "See projects",
     "ctaContact": "Get in touch",
     "ctaCv": "Download résumé",
-    "imageAlt": "Armored knight kneeling in a field of red roses at sunset, with a castle in the distance",
-    "scroll": "Scroll",
-    "scrollAria": "Go to the About section"
+    "imageAlt": "Armored knight kneeling in a field of red roses at sunset, with a castle in the distance"
   },
   "about": {
     "title": "About",

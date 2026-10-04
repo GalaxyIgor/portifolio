@@ -125,7 +125,8 @@ function coverFit(width: number, height: number) {
     (canvasAspect > imageAspect ? 1 : canvasAspect / imageAspect) * margin;
   const sy =
     (canvasAspect > imageAspect ? imageAspect / canvasAspect : 1) * margin;
-  const [fx, fy] = HERO_IMAGE.focus;
+  const [fx, fy] =
+    canvasAspect < 1 ? HERO_IMAGE.focus.portrait : HERO_IMAGE.focus.landscape;
   return {
     scale: [sx, sy] as const,
     focus: [
@@ -198,6 +199,9 @@ function DepthPlane({ name, compact, onReady }: Omit<Props, "active">) {
       ctx.textBaseline = "middle";
       ctx.fillStyle = "#fff";
       ctx.fillText(name, size.width / 2, centerY);
+      // A textura tem tamanho fixo na GPU (texStorage2D): se a tela mudou de
+      // tamanho, é preciso liberar e alocar de novo, senão o nome sai esticado.
+      textTexture.dispose();
       textTexture.needsUpdate = true;
     });
     return () => {

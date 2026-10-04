@@ -5,6 +5,7 @@ import { Skills } from "@/components/sections/Skills";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { Experience } from "@/components/sections/Experience";
 import { Contact } from "@/components/sections/Contact";
+import { NextSection } from "@/components/sections/NextSection";
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -14,9 +15,13 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     <>
       <Hero />
       <About />
+      <NextSection to="skills" />
       <Skills />
+      <NextSection to="projects" />
       <FeaturedProjects />
+      <NextSection to="experience" />
       <Experience />
+      <NextSection to="contact" />
       <Contact />
     </>
   );

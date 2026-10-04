@@ -9,7 +9,10 @@ export async function Contact() {
   const t = await getTranslations("contact");
 
   return (
-    <section id="contact" className="container-page py-24 md:py-40">
+    <section
+      id="contact"
+      className="container-page pt-14 pb-24 md:pt-16 md:pb-32"
+    >
       <SectionHeading id="contact" title={t("title")} intro={t("body")} />
       <Reveal>
         <a

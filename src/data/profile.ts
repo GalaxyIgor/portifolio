@@ -10,7 +10,7 @@ export const profile = {
   // Coloque a foto em /public/images/igor.jpg. null mostra o monograma.
   photo: null as string | null,
   socials: [
-    { label: "GitHub", href: "https://github.com/seu-usuario" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/seu-usuario" },
+    { label: "GitHub", href: "https://github.com/GalaxyIgor" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/igorbelisario/" },
   ],
 };

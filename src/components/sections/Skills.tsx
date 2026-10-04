@@ -12,7 +12,7 @@ export async function Skills() {
   const locale = (await getLocale()) as Locale;
 
   return (
-    <section id="skills" className="container-page py-24 md:py-36">
+    <section id="skills" className="container-page py-14 md:py-16">
       <SectionHeading id="skills" title={t("title")} intro={t("intro")} />
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {skillGroups.map((group, i) => (

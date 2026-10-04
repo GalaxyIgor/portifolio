@@ -13,7 +13,8 @@
     "contact": "Contato",
     "openMenu": "Abrir menu",
     "closeMenu": "Fechar menu",
-    "primary": "Navegação principal"
+    "primary": "Navegação principal",
+    "goTo": "Ir para {section}"
   },
   "theme": {
     "toggle": "Alternar tema claro/escuro"
@@ -34,9 +35,7 @@
     "ctaProjects": "Ver projetos",
     "ctaContact": "Falar comigo",
     "ctaCv": "Baixar currículo",
-    "imageAlt": "Cavaleiro de armadura ajoelhado num campo de rosas vermelhas ao pôr do sol, com um castelo ao fundo",
-    "scroll": "Rolar",
-    "scrollAria": "Ir para a seção Sobre"
+    "imageAlt": "Cavaleiro de armadura ajoelhado num campo de rosas vermelhas ao pôr do sol, com um castelo ao fundo"
   },
   "about": {
     "title": "Sobre",

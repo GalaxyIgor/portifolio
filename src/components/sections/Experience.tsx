@@ -17,7 +17,7 @@ export async function Experience() {
     });
 
   return (
-    <section id="experience" className="container-page py-24 md:py-36">
+    <section id="experience" className="container-page py-14 md:py-16">
       <SectionHeading id="experience" title={t("title")} />
       <ol className="relative ml-2 border-l border-line">
         {experience.map((item, i) => (
