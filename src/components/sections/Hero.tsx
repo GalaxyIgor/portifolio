@@ -27,6 +27,7 @@ export async function Hero() {
 
   return (
     <section
+      id="home"
       data-theme="dark"
       data-hero
       aria-labelledby="hero-title"

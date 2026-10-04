@@ -284,6 +284,117 @@ html::-webkit-scrollbar {
 }
 
 /* Seta do hero: a ✦ desce pela haste em loop (parada com movimento reduzido) */
+.section-stars {
+  position: fixed;
+  top: 50%;
+  right: 1rem;
+  z-index: 50;
+  transform: translateY(-50%);
+}
+
+.section-stars ul {
+  position: relative;
+}
+
+.section-stars ul::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  left: 50%;
+  width: 1px;
+  background: var(--line);
+  opacity: 0.6;
+}
+
+.section-star {
+  position: relative;
+  display: flex;
+  width: 28px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.section-star-icon {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  transition:
+    transform 0.4s var(--ease-out-quint),
+    color 0.3s ease;
+}
+
+.section-star[aria-current] {
+  color: var(--accent);
+}
+
+.section-star[aria-current] .section-star-icon {
+  transform: scale(1.7) rotate(90deg);
+}
+
+.section-star:hover,
+.section-star:focus-visible {
+  color: var(--accent);
+}
+
+.section-star-label {
+  position: absolute;
+  right: calc(100% + 8px);
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(4px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.section-star:hover .section-star-label,
+.section-star:focus-visible .section-star-label {
+  opacity: 1;
+  transform: none;
+}
+
+@media (width < 80rem) {
+  .home-sections .container-page {
+    padding-right: 3.5rem;
+  }
+}
+
+@media (width >= 48rem) {
+  .section-stars {
+    right: 1.5rem;
+  }
+
+  .section-star {
+    width: 44px;
+  }
+
+  .section-star-icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (48rem <= width < 80rem) {
+  .home-sections .container-page {
+    padding-right: 5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-star-icon,
+  .section-star-label {
+    transition: none;
+  }
+}
+
 @keyframes cue-fall {
   0% {
     transform: translate(-50%, -6px);

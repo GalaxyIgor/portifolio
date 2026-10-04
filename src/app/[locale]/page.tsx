@@ -6,13 +6,15 @@ import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { Experience } from "@/components/sections/Experience";
 import { Contact } from "@/components/sections/Contact";
 import { NextSection } from "@/components/sections/NextSection";
+import { SectionStars } from "@/components/layout/SectionStars";
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
 
   return (
-    <>
+    <div className="home-sections">
+      <SectionStars />
       <Hero />
       <About />
       <NextSection to="skills" />
@@ -23,6 +25,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <Experience />
       <NextSection to="contact" />
       <Contact />
-    </>
+    </div>
   );
 }

@@ -14,6 +14,7 @@
     "openMenu": "Abrir menu",
     "closeMenu": "Fechar menu",
     "primary": "Navegação principal",
+    "sections": "Navegação por seções",
     "goTo": "Ir para {section}"
   },
   "theme": {
