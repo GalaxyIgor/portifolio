@@ -49,12 +49,25 @@ export async function generateMetadata({
     },
     openGraph: {
       type: "website",
+      url: `/${locale}`,
       locale: locale === "pt" ? "pt_BR" : "en_US",
       title: t("title"),
       description: t("description"),
       siteName: profile.name,
     },
-    twitter: { card: "summary_large_image" },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: [
+        {
+          url: `/${locale}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: t("title"),
+        },
+      ],
+    },
   };
 }
 

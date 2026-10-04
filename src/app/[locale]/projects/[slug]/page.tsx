@@ -9,6 +9,7 @@ import { ProjectCover } from "@/components/ui/ProjectCover";
 import { ProjectGallery } from "@/components/sections/ProjectGallery";
 import { Sparkle } from "@/components/ui/Sparkle";
 import { buttonClasses } from "@/components/ui/button";
+import { profile } from "@/data/profile";
 
 export const dynamicParams = false;
 
@@ -34,7 +35,28 @@ export async function generateMetadata({
         routing.locales.map((other) => [other, `/${other}/projects/${slug}`]),
       ),
     },
-    openGraph: { title: project.title[l], description: project.summary[l] },
+    openGraph: {
+      type: "website",
+      siteName: profile.name,
+      locale: locale === "pt" ? "pt_BR" : "en_US",
+      url: `/${locale}/projects/${slug}`,
+      title: project.title[l],
+      description: project.summary[l],
+      images: [
+        {
+          url: `${profile.siteUrl}/${locale}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: `${profile.name} — Portfolio`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title[l],
+      description: project.summary[l],
+      images: [`/${locale}/opengraph-image`],
+    },
   };
 }
 

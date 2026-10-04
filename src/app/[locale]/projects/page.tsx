@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { getProjects, getStackTags } from "@/lib/projects";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectGrid } from "@/components/sections/ProjectGrid";
+import { profile } from "@/data/profile";
 
 export async function generateMetadata({
   params,
@@ -13,6 +14,28 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("intro"),
+    openGraph: {
+      type: "website",
+      siteName: profile.name,
+      locale: locale === "pt" ? "pt_BR" : "en_US",
+      url: `/${locale}/projects`,
+      title: t("title"),
+      description: t("intro"),
+      images: [
+        {
+          url: `${profile.siteUrl}/${locale}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: `${profile.name} — Portfolio`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("intro"),
+      images: [`/${locale}/opengraph-image`],
+    },
     alternates: {
       canonical: `/${locale}/projects`,
       languages: { pt: "/pt/projects", en: "/en/projects" },

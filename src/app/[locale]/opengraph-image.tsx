@@ -2,10 +2,12 @@ import { ImageResponse } from "next/og";
 import { getTranslations } from "next-intl/server";
 import { profile } from "@/data/profile";
 import { routing } from "@/i18n/routing";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = profile.name;
+export const alt = `${profile.name} — Portfolio`;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -22,7 +24,7 @@ function Star({ size: s, color }: { size: number; color: string }) {
   );
 }
 
-/** Pôster preto com o nome, no estilo do hero. */
+/** Cartão de compartilhamento com a mesma pintura e tipografia do hero. */
 export default async function OpengraphImage({
   params,
 }: {
@@ -31,6 +33,11 @@ export default async function OpengraphImage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "hero" });
   const bone = "#d9d4c7";
+  const [painting, font] = await Promise.all([
+    // JPEG derivado do hero: o renderizador Open Graph não suporta WebP.
+    readFile(join(process.cwd(), "public/hero/knight-share.jpg")),
+    readFile(join(process.cwd(), "public/fonts/PirataOne-Regular.ttf")),
+  ]);
 
   return new ImageResponse(
     <div
@@ -38,15 +45,56 @@ export default async function OpengraphImage({
         width: "100%",
         height: "100%",
         display: "flex",
+        position: "relative",
         flexDirection: "column",
         padding: "56px 72px",
         background: "#0a0a0a",
         color: bone,
-        fontFamily: "serif",
+        fontFamily: "sans-serif",
       }}
     >
+      {/* O arquivo local dispensa qualquer chamada externa ao gerar a prévia. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        alt=""
+        src={`data:image/jpeg;base64,${painting.toString("base64")}`}
+        width={1200}
+        height={630}
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          width: 1200,
+          height: 630,
+          objectFit: "cover",
+        }}
+      />
       <div
         style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(10,10,10,0.65), rgba(10,10,10,0.25) 45%, rgba(10,10,10,0.94))",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: 24,
+          top: 24,
+          right: 24,
+          bottom: 24,
+          display: "flex",
+          border: "1px solid rgba(217,212,199,0.4)",
+        }}
+      />
+      <div
+        style={{
+          position: "relative",
           display: "flex",
           alignItems: "center",
           gap: 18,
@@ -62,11 +110,13 @@ export default async function OpengraphImage({
       </div>
       <div
         style={{
+          position: "relative",
           display: "flex",
           flex: 1,
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 260,
+          fontSize: 250,
+          fontFamily: "Pirata One",
           lineHeight: 1,
         }}
       >
@@ -74,6 +124,7 @@ export default async function OpengraphImage({
       </div>
       <div
         style={{
+          position: "relative",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -84,7 +135,7 @@ export default async function OpengraphImage({
             fontSize: 30,
             fontStyle: "italic",
             maxWidth: 760,
-            color: "#8b867c",
+            color: bone,
           }}
         >
           {t("thesis")}
@@ -92,6 +143,9 @@ export default async function OpengraphImage({
         <Star size={56} color="#c1272d" />
       </div>
     </div>,
-    size,
+    {
+      ...size,
+      fonts: [{ name: "Pirata One", data: font, weight: 400, style: "normal" }],
+    },
   );
 }
