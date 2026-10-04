@@ -34,7 +34,9 @@
     "ctaProjects": "Ver projetos",
     "ctaContact": "Falar comigo",
     "ctaCv": "Baixar currículo",
-    "imageAlt": "Cavaleiro de armadura ajoelhado num campo de rosas vermelhas ao pôr do sol, com um castelo ao fundo"
+    "imageAlt": "Cavaleiro de armadura ajoelhado num campo de rosas vermelhas ao pôr do sol, com um castelo ao fundo",
+    "scroll": "Rolar",
+    "scrollAria": "Ir para a seção Sobre"
   },
   "about": {
     "title": "Sobre",

@@ -282,3 +282,25 @@ html::-webkit-scrollbar {
     transition: opacity 0.2s linear;
   }
 }
+
+/* Seta do hero: a ✦ desce pela haste em loop (parada com movimento reduzido) */
+@keyframes cue-fall {
+  0% {
+    transform: translate(-50%, -6px);
+    opacity: 0;
+  }
+  25%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 34px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-cue-star {
+    animation: cue-fall 2.2s var(--ease-out-quint) infinite;
+  }
+}

@@ -9,6 +9,7 @@ import { Crosshair } from "@/components/ui/Crosshair";
 import { HudBox } from "@/components/ui/HudBox";
 import { Sparkle } from "@/components/ui/Sparkle";
 import { HeroVisual } from "@/components/three/HeroVisual";
+import { ScrollCue } from "./ScrollCue";
 
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as React.CSSProperties;
 
@@ -51,7 +52,13 @@ export async function Hero() {
             </p>
             <p className="text-lg leading-snug italic">{t("thesis")}</p>
           </div>
-          <div aria-hidden className="hidden md:block" />
+          <div className="hidden justify-center md:flex">
+            <ScrollCue
+              label={t("scroll")}
+              ariaLabel={t("scrollAria")}
+              className="rise"
+            />
+          </div>
           <div
             className="hidden rise md:block md:text-right"
             style={delay(500)}

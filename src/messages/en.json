@@ -34,7 +34,9 @@
     "ctaProjects": "See projects",
     "ctaContact": "Get in touch",
     "ctaCv": "Download résumé",
-    "imageAlt": "Armored knight kneeling in a field of red roses at sunset, with a castle in the distance"
+    "imageAlt": "Armored knight kneeling in a field of red roses at sunset, with a castle in the distance",
+    "scroll": "Scroll",
+    "scrollAria": "Go to the About section"
   },
   "about": {
     "title": "About",
