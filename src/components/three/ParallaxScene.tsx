@@ -279,5 +279,5 @@ function PetalLayer({ compact }: { compact: boolean }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return <Petals count={compact ? 18 : 40} scroll={scroll} spread={width} />;
+  return <Petals count={compact ? 10 : 24} scroll={scroll} spread={width} />;
 }
