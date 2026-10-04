@@ -6,6 +6,7 @@ import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { Petals } from "./Petals";
 import { HERO_IMAGE, NAME_LAYOUT } from "./heroImage";
+import { useDeviceTilt } from "./useDeviceTilt";
 
 type Props = {
   name: string;
@@ -154,6 +155,12 @@ function DepthPlane({ name, compact, onReady }: Omit<Props, "active">) {
   const scroll = useRef(0);
   const ready = useRef(false);
   const smooth = useRef({ x: 0, y: 0, scroll: 0 });
+  // Em telas de toque, a inclinação do aparelho faz o papel do cursor
+  const isTouch = useMemo(
+    () => window.matchMedia("(pointer: coarse)").matches,
+    [],
+  );
+  const tilt = useDeviceTilt(isTouch);
 
   const textCanvas = useMemo(() => document.createElement("canvas"), []);
   const textTexture = useMemo(
@@ -231,9 +238,19 @@ function DepthPlane({ name, compact, onReady }: Omit<Props, "active">) {
   useFrame((state, delta) => {
     const ease = 1 - Math.exp(-delta * 3);
     const t = state.clock.elapsedTime;
-    // No mobile não há cursor: um balanço lento faz o papel do mouse
-    const px = compact ? Math.sin(t * 0.4) * 0.6 : pointer.current.x;
-    const py = compact ? Math.cos(t * 0.33) * 0.3 : -pointer.current.y;
+    // Cursor no desktop; inclinação do aparelho no celular; sem nenhum dos
+    // dois (toque sem sensor), um balanço lento
+    const tilted = tilt.current.active;
+    const px = tilted
+      ? tilt.current.x
+      : compact || isTouch
+        ? Math.sin(t * 0.4) * 0.6
+        : pointer.current.x;
+    const py = tilted
+      ? tilt.current.y
+      : compact || isTouch
+        ? Math.cos(t * 0.33) * 0.3
+        : -pointer.current.y;
     const m = smooth.current;
     m.x += (px - m.x) * ease;
     m.y += (py - m.y) * ease;
