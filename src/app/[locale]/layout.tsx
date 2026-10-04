@@ -8,6 +8,7 @@ import { profile } from "@/data/profile";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollRail } from "@/components/layout/ScrollRail";
 import "../globals.css";
 
 const pirata = Pirata_One({
@@ -87,6 +88,7 @@ export default async function LocaleLayout({
               {children}
             </main>
             <Footer />
+            <ScrollRail />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

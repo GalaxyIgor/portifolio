@@ -200,9 +200,8 @@ html:has([data-hero]) .site-header:not([data-past-hero]) .site-bar {
   }
 }
 
-/* Barra de rolagem como trilho de HUD: linha fina à esquerda e uma haste
-   com ✦ no meio. Chrome/Edge/Safari usam ::-webkit-scrollbar; o Firefox
-   recebe a versão fina nas cores do tema. */
+/* Barras de rolagem internas (ex.: blocos de código) no estilo HUD.
+   A rolagem da página usa o trilho próprio (ScrollRail), mais abaixo. */
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
@@ -217,23 +216,69 @@ html:has([data-hero]) .site-header:not([data-past-hero]) .site-bar {
   min-height: 48px;
   background:
     var(--scroll-mark) center / 9px 9px no-repeat,
-    linear-gradient(var(--muted), var(--muted)) center / 2px calc(100% - 6px) no-repeat;
+    linear-gradient(var(--muted), var(--muted)) center / 2px calc(100% - 6px)
+      no-repeat;
 }
 
 ::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:active {
   background:
     var(--scroll-mark) center / 11px 11px no-repeat,
-    linear-gradient(var(--accent), var(--accent)) center / 2px calc(100% - 6px) no-repeat;
+    linear-gradient(var(--accent), var(--accent)) center / 2px calc(100% - 6px)
+      no-repeat;
 }
 
 ::-webkit-scrollbar-corner {
   background: var(--bg);
 }
 
-@supports not selector(::-webkit-scrollbar) {
-  html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--muted) var(--bg);
+/* A página esconde a barra nativa: o ScrollRail desenha o trilho, que some
+   parado e reaparece com desfoque ao rolar. A rolagem em si não muda. */
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-rail {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateX(6px);
+  transition:
+    opacity 0.45s ease,
+    filter 0.45s ease,
+    transform 0.45s var(--ease-out-quint);
+}
+
+.scroll-rail[data-visible] {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+  transition-duration: 0.35s;
+}
+
+.scroll-rail-thumb {
+  background:
+    var(--scroll-mark) center / 9px 9px no-repeat,
+    linear-gradient(var(--muted), var(--muted)) center / 2px calc(100% - 6px)
+      no-repeat;
+}
+
+.scroll-rail-thumb:hover,
+.scroll-rail[data-dragging] .scroll-rail-thumb {
+  background:
+    var(--scroll-mark) center / 11px 11px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) center / 2px calc(100% - 6px)
+      no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-rail,
+  .scroll-rail[data-visible] {
+    filter: none;
+    transform: none;
+    transition: opacity 0.2s linear;
   }
 }
