@@ -14,6 +14,8 @@
   --accent-ink: #e9e3d6;
   --accent-soft: rgb(142 27 27 / 0.1);
   --grain-opacity: 0.22;
+  /* ✦ da barra de rolagem (data URI não lê variáveis CSS) */
+  --scroll-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%238e1b1b' d='M12 0C12.6 6.4 17.6 11.4 24 12 17.6 12.6 12.6 17.6 12 24 11.4 17.6 6.4 12.6 0 12 6.4 11.4 11.4 6.4 12 0Z'/%3E%3C/svg%3E");
 
   color-scheme: light;
 }
@@ -31,6 +33,7 @@ html:has([data-hero]) .site-header:not([data-past-hero]) {
   --accent-ink: #f1ece2;
   --accent-soft: rgb(193 39 45 / 0.14);
   --grain-opacity: 0.12;
+  --scroll-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23c1272d' d='M12 0C12.6 6.4 17.6 11.4 24 12 17.6 12.6 12.6 17.6 12 24 11.4 17.6 6.4 12.6 0 12 6.4 11.4 11.4 6.4 12 0Z'/%3E%3C/svg%3E");
 
   color-scheme: dark;
 }
@@ -194,5 +197,43 @@ html:has([data-hero]) .site-header:not([data-past-hero]) .site-bar {
 @media (prefers-reduced-motion: reduce) {
   .site-bar {
     transition: none;
+  }
+}
+
+/* Barra de rolagem como trilho de HUD: linha fina à esquerda e uma haste
+   com ✦ no meio. Chrome/Edge/Safari usam ::-webkit-scrollbar; o Firefox
+   recebe a versão fina nas cores do tema. */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-left: 1px solid var(--line);
+}
+
+::-webkit-scrollbar-thumb {
+  min-height: 48px;
+  background:
+    var(--scroll-mark) center / 9px 9px no-repeat,
+    linear-gradient(var(--muted), var(--muted)) center / 2px calc(100% - 6px) no-repeat;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background:
+    var(--scroll-mark) center / 11px 11px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) center / 2px calc(100% - 6px) no-repeat;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted) var(--bg);
   }
 }
