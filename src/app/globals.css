@@ -801,39 +801,191 @@ html::-webkit-scrollbar {
   transition: transform 300ms var(--ease-out-quint);
 }
 
-/* Espinhos de gravura crescem pelas bordas, sem capturar cliques da capa. */
+/* Roseiras escuras com pétalas em camadas e crescimento pela moldura. */
 .thorn-vine {
+  --vine-bark-dark: #271519;
+  --vine-bark-mid: #512c2c;
+  --vine-bark-light: #87544a;
+  --vine-leaf-dark: #181f19;
+  --vine-leaf-mid: #303b2a;
+  --vine-leaf-light: #586047;
+  --vine-thorn-tip: #a98b76;
+  --vine-rose-dark: #31070e;
+  --vine-rose-mid: #841724;
+  --vine-rose-light: #bb3a42;
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  overflow: visible;
   pointer-events: none;
-  color: var(--accent);
   opacity: var(--vine-visible, 0);
-  transition: opacity 220ms ease;
+  transition: opacity 240ms ease;
 }
 
-.thorn-vine-stem {
+[data-theme="dark"] .thorn-vine {
+  --vine-bark-dark: #28151a;
+  --vine-bark-mid: #653336;
+  --vine-bark-light: #9e615b;
+  --vine-leaf-dark: #1c251e;
+  --vine-leaf-mid: #3a4633;
+  --vine-leaf-light: #687453;
+  --vine-thorn-tip: #b99a89;
+  --vine-rose-dark: #390710;
+  --vine-rose-mid: #a01d2e;
+  --vine-rose-light: #d34950;
+}
+
+.vine-bark-dark {
+  stop-color: var(--vine-bark-dark);
+}
+.vine-bark-mid {
+  stop-color: var(--vine-bark-mid);
+}
+.vine-bark-light {
+  stop-color: var(--vine-bark-light);
+}
+.vine-leaf-dark {
+  stop-color: var(--vine-leaf-dark);
+}
+.vine-leaf-mid {
+  stop-color: var(--vine-leaf-mid);
+}
+.vine-leaf-light {
+  stop-color: var(--vine-leaf-light);
+}
+.vine-thorn-tip {
+  stop-color: var(--vine-thorn-tip);
+}
+
+.vine-rose-dark {
+  stop-color: var(--vine-rose-dark);
+}
+
+.vine-rose-mid {
+  stop-color: var(--vine-rose-mid);
+}
+
+.vine-rose-light {
+  stop-color: var(--vine-rose-light);
+}
+
+.thorn-vine-calyx {
+  fill: var(--vine-leaf-dark);
+  stroke: var(--vine-leaf-mid);
+  stroke-width: 0.6;
+}
+
+.thorn-vine-rose-petal {
+  stroke: var(--vine-rose-dark);
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+}
+
+.thorn-vine-rose-fold,
+.thorn-vine-rose-highlight {
   fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
   stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
+}
+
+.thorn-vine-rose-fold {
+  stroke: var(--vine-rose-dark);
+  stroke-width: 1;
+}
+
+.thorn-vine-rose-heart {
+  fill: var(--vine-rose-dark);
+}
+
+.thorn-vine-rose-highlight {
+  stroke: var(--vine-rose-light);
+  stroke-width: 0.65;
+  opacity: 0.8;
+}
+
+.thorn-vine-detail.thorn-vine-flower {
+  transition-duration: 200ms, 650ms;
+}
+
+.thorn-vine-branch {
+  filter: drop-shadow(1px 2px 1px rgb(0 0 0 / 0.32));
+}
+
+.thorn-vine-growth,
+.thorn-vine-tendril {
+  stroke-linecap: round;
   stroke-dasharray: 1;
   stroke-dashoffset: var(--vine-offset, 1);
-  transition: stroke-dashoffset 650ms ease;
+  transition: stroke-dashoffset 1450ms linear;
+  transition-delay: calc(var(--vine-stagger, 0) * var(--growth-delay, 0ms));
 }
 
+.thorn-vine-stem,
 .thorn-vine-thorn {
-  fill: currentColor;
+  stroke: var(--vine-bark-dark);
+  stroke-width: 0.55;
+  stroke-linejoin: round;
+}
+
+.thorn-vine-ridge,
+.thorn-vine-bark,
+.thorn-vine-thorn-edge,
+.thorn-vine-petiole,
+.thorn-vine-vein,
+.thorn-vine-tendril {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.thorn-vine-ridge {
+  stroke: var(--vine-bark-light);
+  stroke-width: 0.7;
+  opacity: 0.7;
+}
+
+.thorn-vine-bark {
+  stroke: var(--vine-bark-dark);
+  stroke-width: 0.8;
+  stroke-dasharray: 2 9 4 15 1 7;
+  opacity: 0.6;
+}
+
+.thorn-vine-detail {
   opacity: var(--vine-visible, 0);
-  transform: scale(var(--vine-scale, 0.65));
-  transform-box: fill-box;
-  transform-origin: center;
+  transform: scale(var(--vine-scale, 0.01)) rotate(var(--vine-unfurl, -18deg));
+  transform-origin: 0 0;
   transition:
-    opacity 180ms ease,
-    transform 250ms ease;
-  transition-delay: calc(var(--vine-stagger, 0) * var(--thorn-delay, 0ms));
+    opacity 160ms ease,
+    transform 460ms cubic-bezier(0.2, 0.65, 0.3, 1);
+  transition-delay: calc(var(--vine-stagger, 0) * var(--growth-delay, 0ms));
+}
+
+.thorn-vine-thorn-edge {
+  stroke: var(--vine-thorn-tip);
+  stroke-width: 0.65;
+  opacity: 0.7;
+}
+
+.thorn-vine-petiole,
+.thorn-vine-tendril {
+  stroke: var(--vine-bark-light);
+  stroke-width: 0.85;
+}
+
+.thorn-vine-tendril {
+  transition-duration: 550ms;
+}
+
+.thorn-vine-leaf {
+  stroke: var(--vine-leaf-dark);
+  stroke-width: 0.65;
+  stroke-linejoin: round;
+}
+
+.thorn-vine-vein {
+  stroke: var(--vine-leaf-light);
+  stroke-width: 0.55;
+  opacity: 0.75;
 }
 
 .project-card:has(a:focus-visible) .thorn-vine,
@@ -841,6 +993,7 @@ html::-webkit-scrollbar {
   --vine-visible: 1;
   --vine-offset: 0;
   --vine-scale: 1;
+  --vine-unfurl: 0deg;
   --vine-stagger: 1;
 }
 
@@ -850,18 +1003,20 @@ html::-webkit-scrollbar {
     --vine-visible: 1;
     --vine-offset: 0;
     --vine-scale: 1;
+    --vine-unfurl: 0deg;
     --vine-stagger: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .thorn-vine,
-  .thorn-vine-stem,
-  .thorn-vine-thorn {
+  .thorn-vine-growth,
+  .thorn-vine-detail,
+  .thorn-vine-tendril {
     transition: none;
   }
 
-  .thorn-vine-thorn {
+  .thorn-vine-detail {
     transform: none;
   }
 }
